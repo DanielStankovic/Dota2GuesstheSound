@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.example.daniel.dota2guessthesound.MainActivity">
+
+    <TextView
+        android:id="@+id/playGameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:onClick="playGameActivity"
+        android:text="Start Quiz"
+        android:textColor="#ff4d00"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/fastFingerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:onClick="fastFingerActivity"
+        android:text="Fast Finger Mode"
+        android:textColor="#ff4d00"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/optionsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:onClick="optionsActivity"
+        android:text="Options"
+        android:textColor="#ff4d00"
+        android:textSize="30sp" />
+</LinearLayout>
