@@ -139,7 +139,7 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
             mediaPlayer.start();
         }
     }
-
+//this is the new branch testing
     public void generateQuestion(){
 
         Random random = new Random();
