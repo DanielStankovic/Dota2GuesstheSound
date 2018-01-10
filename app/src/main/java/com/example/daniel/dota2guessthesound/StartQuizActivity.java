@@ -9,6 +9,8 @@ import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
@@ -18,6 +20,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,6 +61,9 @@ public class StartQuizActivity extends ToastActivity {
     LinearLayout buttonsLayout;
 
     SharedPreferences settings;
+
+    InterstitialAd mInterstitialAd;
+
 
 
     ArrayList<Integer> sounds = new ArrayList<Integer>(Arrays.<Integer>asList(R.raw.astral_spirit, R.raw.charge_of_darkness,
@@ -120,6 +129,9 @@ public class StartQuizActivity extends ToastActivity {
 
 
 
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -215,6 +227,8 @@ public class StartQuizActivity extends ToastActivity {
 
 
         } else{
+
+            showInterstitialAd();
             showCheckAnswerToast("WRONG!", Color.RED );
             showGameOverScreen();
 
@@ -244,9 +258,11 @@ public class StartQuizActivity extends ToastActivity {
         alreadyUsedSounds.clear();
         generateQuestion();
 
+
     }
 
     public void showGameOverScreen(){
+
 
         soundAndScoreLayout.setVisibility(View.GONE);
         buttonsLayout.setVisibility(View.GONE);
@@ -265,6 +281,25 @@ public class StartQuizActivity extends ToastActivity {
 
         highScoreTextView.setText("Highscore: " + highScore);
 
+    }
+
+    public void showInterstitialAd (){
+
+        if(mInterstitialAd.isLoaded()){
+            mInterstitialAd.show();
+        } else{
+
+
+            Log.i("TAG ADD", "Add not loaded yet.");
+        }
+
+        mInterstitialAd.setAdListener(new AdListener(){
+
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
     }
 
 }
