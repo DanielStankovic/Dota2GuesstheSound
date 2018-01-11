@@ -8,12 +8,27 @@
     android:background="@drawable/background">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/volumeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Soon to be added"
+        android:layout_marginTop="36dp"
+        android:text="Volume"
         android:textColor="@color/toastText"
         android:textSize="30sp" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="100dp"
+        android:max="100"
+        android:progress="0"
+        android:thumb="@drawable/seekbar_icon"
+        android:progressDrawable="@drawable/seekbar_progressbar"
+        android:thumbTintMode="multiply" />
 </RelativeLayout>
