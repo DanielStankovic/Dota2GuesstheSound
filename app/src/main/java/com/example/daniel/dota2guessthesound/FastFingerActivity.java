@@ -65,6 +65,8 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
 
     InterstitialAd mInterstitialAd;
 
+    CountDownTimer countDownTimer;
+
 
     ArrayList<Integer> sounds = new ArrayList<Integer>(Arrays.<Integer>asList(R.raw.astral_spirit, R.raw.charge_of_darkness,
             R.raw.counter_helix, R.raw.curse_of_the_silent, R.raw.dark_pact, R.raw.death_ward, R.raw.dismember,
@@ -143,6 +145,14 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
 
 
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        countDownTimer.cancel();
+    }
+
+
 
     public  void playSound(View view){
 
@@ -240,7 +250,7 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
         scoreTextView.setText("Score: " + Integer.toString(score) + "/" + Integer.toString(numberOfQuestionsTextView));
         alreadyUsedSounds.clear();
         generateQuestion();
-        new CountDownTimer(timer, 1000) {
+       countDownTimer = new CountDownTimer(timer, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
 
