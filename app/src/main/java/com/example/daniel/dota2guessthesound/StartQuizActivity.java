@@ -64,6 +64,7 @@ public class StartQuizActivity extends ToastActivity {
 
     InterstitialAd mInterstitialAd;
 
+    Handler handler;
 
 
     ArrayList<Integer> sounds = new ArrayList<Integer>(Arrays.<Integer>asList(R.raw.astral_spirit, R.raw.charge_of_darkness,
@@ -159,10 +160,14 @@ public class StartQuizActivity extends ToastActivity {
 
     public  void playSound(View view){
 
-        mediaPlayer = MediaPlayer.create(this, sounds.get(chosenSound));
-        mediaPlayer.start();
+          mediaPlayer = MediaPlayer.create(this, sounds.get(chosenSound));
+          mediaPlayer.start();
+
+
         image.setClickable(false);
-        new Handler().postDelayed(new Runnable() {
+       handler = new Handler();
+
+       handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 mediaPlayer.release();
@@ -170,6 +175,7 @@ public class StartQuizActivity extends ToastActivity {
 
             }
         }, mediaPlayer.getDuration() + 10);
+
     }
 
     public void generateQuestion(){
@@ -239,6 +245,7 @@ public class StartQuizActivity extends ToastActivity {
             if (mediaPlayer.isPlaying()) {
                 mediaPlayer.stop();
                 mediaPlayer.release();
+                handler.removeCallbacksAndMessages(null);
 
             }
             image.setClickable(true);
