@@ -11,6 +11,7 @@ import android.os.CountDownTimer;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +19,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,6 +62,8 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
     RelativeLayout playAgainLayout;
     RelativeLayout soundAndScoreLayout;
     LinearLayout buttonsLayout;
+
+    InterstitialAd mInterstitialAd;
 
 
     ArrayList<Integer> sounds = new ArrayList<Integer>(Arrays.<Integer>asList(R.raw.astral_spirit, R.raw.charge_of_darkness,
@@ -124,6 +131,10 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setFonts();
+
+        mInterstitialAd = new InterstitialAd(getApplicationContext());
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         newFragment = new SimpleDialogFragment();
@@ -241,6 +252,7 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
 
                 timerTextView.setText("0s");
                 mediaPlayer.release();
+                showInterstitialAd();
                 showGameOverScreen();
                 alreadyUsedSounds.clear();
 
@@ -294,5 +306,24 @@ public void setFonts(){
         timer = time;
         playAgain(findViewById(R.id.playAgainLayout));
         newFragment.dismiss();
+    }
+
+    public void showInterstitialAd (){
+
+        if(mInterstitialAd.isLoaded()){
+            mInterstitialAd.show();
+        } else{
+
+
+            Log.i("TAG ADD", "Add not loaded yet.");
+        }
+
+        mInterstitialAd.setAdListener(new AdListener(){
+
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
     }
 }

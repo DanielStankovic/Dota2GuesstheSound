@@ -130,7 +130,7 @@ public class StartQuizActivity extends ToastActivity {
 
 
 
-        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd = new InterstitialAd(getApplicationContext());
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
