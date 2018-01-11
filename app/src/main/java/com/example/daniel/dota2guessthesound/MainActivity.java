@@ -20,11 +20,17 @@ import android.view.View;
 
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 public class MainActivity extends ToastActivity {
 
     TextView startQuizTextView;
     TextView optionsTextView;
     TextView fastFingersTextView;
+
+    AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,7 @@ public class MainActivity extends ToastActivity {
         optionsTextView = (TextView)findViewById(R.id.optionsTextView);
         fastFingersTextView = (TextView)findViewById(R.id.fastFingerTextView);
 
+
        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Typeface font = Typeface.createFromAsset(getAssets(),"fonts/score_font.ttf" );
@@ -42,6 +49,10 @@ public class MainActivity extends ToastActivity {
         optionsTextView.setTypeface(font);
         fastFingersTextView.setTypeface(font);
 
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        mAdView = (AdView)findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override
