@@ -18,6 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -35,6 +38,12 @@ public class MainActivity extends ToastActivity {
 
     String visibleView = "startQuiz";
 
+    Animation animation;
+
+    ImageView leftArrow;
+    ImageView rightArrow;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +53,8 @@ public class MainActivity extends ToastActivity {
         fastFingersTextView = (TextView)findViewById(R.id.fastFingerTextView);
         invokerTextView = (TextView)findViewById(R.id.invokerTextView);
 
+        leftArrow = (ImageView)findViewById(R.id.leftArrow);
+        rightArrow = (ImageView)findViewById(R.id.rightArrow);
 
        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -58,6 +69,8 @@ public class MainActivity extends ToastActivity {
         mAdView = (AdView)findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+
     }
 
     @Override
@@ -110,26 +123,28 @@ public class MainActivity extends ToastActivity {
     }
 
     public void goLeft(View view){
+
+
         if(visibleView.equals("startQuiz")){
 
         } else if(visibleView.equals("fastFinger")){
 
             visibleView = "startQuiz";
-        //    animateToLeft(fastFinger, invokerMode);
+        animateToRight(fastFingersTextView, startQuizTextView);
             fastFingersTextView.setVisibility(View.GONE);
             startQuizTextView.setVisibility(View.VISIBLE);
         }
         else if(visibleView.equals("invokerMode")){
 
             visibleView = "fastFinger";
-            //  animateToLeft(invokerMode);
+           animateToRight(invokerTextView, fastFingersTextView);
             invokerTextView.setVisibility(View.GONE);
             fastFingersTextView.setVisibility(View.VISIBLE);
 
         }
         else if(visibleView.equals("options")){
             visibleView = "invokerMode";
-
+            animateToRight(optionsTextView, invokerTextView);
             optionsTextView.setVisibility(View.GONE);
             invokerTextView.setVisibility(View.VISIBLE);
         }
@@ -139,17 +154,20 @@ public class MainActivity extends ToastActivity {
     public void goRight(View view){
         if(visibleView.equals("startQuiz")){
             visibleView = "fastFinger";
+            animateToLeft(startQuizTextView, fastFingersTextView);
             startQuizTextView.setVisibility(View.GONE);
             fastFingersTextView.setVisibility(View.VISIBLE);
         }
         else if(visibleView.equals("fastFinger")){
             visibleView = "invokerMode";
+            animateToLeft(fastFingersTextView, invokerTextView);
             fastFingersTextView.setVisibility(View.GONE);
             invokerTextView.setVisibility(View.VISIBLE);
 
         }
         else if(visibleView.equals("invokerMode")){
             visibleView = "options";
+            animateToLeft(invokerTextView, optionsTextView);
             invokerTextView.setVisibility(View.GONE);
             optionsTextView.setVisibility(View.VISIBLE);
         }
@@ -158,5 +176,46 @@ public class MainActivity extends ToastActivity {
 
         }
 
+    }
+
+    private void animateToLeft(View view1, View view2){
+
+        animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.view1toleft);
+        view1.startAnimation(animation);
+        animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.view2toleft);
+        view2.startAnimation(animation);
+        animationListener(animation);
+
+    }
+
+    private void animateToRight(View view1, View view2) {
+        animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.view1toright);
+        view1.startAnimation(animation);
+        animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.view2toright);
+        view2.startAnimation(animation);
+        animationListener(animation);
+
+    }
+
+    public void animationListener(Animation animation){
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                leftArrow.setClickable(false);
+                rightArrow.setClickable(false);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                leftArrow.setClickable(true);
+                rightArrow.setClickable(true);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 }
