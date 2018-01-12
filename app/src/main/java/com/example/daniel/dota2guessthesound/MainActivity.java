@@ -29,8 +29,11 @@ public class MainActivity extends ToastActivity {
     TextView startQuizTextView;
     TextView optionsTextView;
     TextView fastFingersTextView;
+    TextView invokerTextView;
 
     AdView mAdView;
+
+    String visibleView = "startQuiz";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class MainActivity extends ToastActivity {
         startQuizTextView = (TextView)findViewById(R.id.playGameTextView);
         optionsTextView = (TextView)findViewById(R.id.optionsTextView);
         fastFingersTextView = (TextView)findViewById(R.id.fastFingerTextView);
+        invokerTextView = (TextView)findViewById(R.id.invokerTextView);
 
 
        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -48,6 +52,7 @@ public class MainActivity extends ToastActivity {
         startQuizTextView.setTypeface(font);
         optionsTextView.setTypeface(font);
         fastFingersTextView.setTypeface(font);
+        invokerTextView.setTypeface(font);
 
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
         mAdView = (AdView)findViewById(R.id.adView);
@@ -102,5 +107,56 @@ public class MainActivity extends ToastActivity {
 
         Intent optionsIntent = new Intent(this, OptionsActivity.class);
         startActivity(optionsIntent);
+    }
+
+    public void goLeft(View view){
+        if(visibleView.equals("startQuiz")){
+
+        } else if(visibleView.equals("fastFinger")){
+
+            visibleView = "startQuiz";
+        //    animateToLeft(fastFinger, invokerMode);
+            fastFingersTextView.setVisibility(View.GONE);
+            startQuizTextView.setVisibility(View.VISIBLE);
+        }
+        else if(visibleView.equals("invokerMode")){
+
+            visibleView = "fastFinger";
+            //  animateToLeft(invokerMode);
+            invokerTextView.setVisibility(View.GONE);
+            fastFingersTextView.setVisibility(View.VISIBLE);
+
+        }
+        else if(visibleView.equals("options")){
+            visibleView = "invokerMode";
+
+            optionsTextView.setVisibility(View.GONE);
+            invokerTextView.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    public void goRight(View view){
+        if(visibleView.equals("startQuiz")){
+            visibleView = "fastFinger";
+            startQuizTextView.setVisibility(View.GONE);
+            fastFingersTextView.setVisibility(View.VISIBLE);
+        }
+        else if(visibleView.equals("fastFinger")){
+            visibleView = "invokerMode";
+            fastFingersTextView.setVisibility(View.GONE);
+            invokerTextView.setVisibility(View.VISIBLE);
+
+        }
+        else if(visibleView.equals("invokerMode")){
+            visibleView = "options";
+            invokerTextView.setVisibility(View.GONE);
+            optionsTextView.setVisibility(View.VISIBLE);
+        }
+
+        else if(visibleView.equals("options")){
+
+        }
+
     }
 }

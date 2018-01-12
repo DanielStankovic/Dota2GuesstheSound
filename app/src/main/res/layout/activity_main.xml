@@ -9,46 +9,134 @@
     android:orientation="vertical"
     tools:context="com.example.daniel.dota2guessthesound.MainActivity">
 
-    <TextView
-        android:id="@+id/playGameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:gravity="center"
-        android:onClick="playGameActivity"
-        android:text="Start Quiz"
-        android:textColor="#ff4d00"
-        android:textSize="40sp" />
 
-    <TextView
-        android:id="@+id/fastFingerTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:onClick="fastFingerActivity"
-        android:text="Fast Finger Mode"
-        android:textColor="#ff4d00"
-        android:textSize="30sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/optionsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:onClick="optionsActivity"
-        android:text="Options"
-        android:textColor="#ff4d00"
-        android:textSize="30sp" />
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/leftArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            app:srcCompat="@drawable/left_arrow"
+            android:onClick="goLeft"/>
+
+        <ImageView
+            android:id="@+id/rightArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/right_arrow"
+            android:onClick="goRight"/>
+
+        <TextView
+            android:id="@+id/playGameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toEndOf="@id/leftArrow"
+            android:layout_toLeftOf="@+id/rightArrow"
+            android:layout_toRightOf="@id/leftArrow"
+            android:layout_toStartOf="@id/rightArrow"
+            android:gravity="center"
+            android:onClick="playGameActivity"
+            android:text="Start Quiz"
+            android:textColor="#ff4d00"
+            android:textSize="30sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/fastFingerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toEndOf="@id/leftArrow"
+            android:layout_toLeftOf="@+id/rightArrow"
+            android:layout_toRightOf="@id/leftArrow"
+            android:layout_toStartOf="@id/rightArrow"
+            android:gravity="center"
+            android:onClick="fastFingerActivity"
+            android:text="Fast Finger Mode"
+            android:textColor="#ff4d00"
+            android:textSize="30sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/optionsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toEndOf="@id/leftArrow"
+            android:layout_toLeftOf="@+id/rightArrow"
+            android:layout_toRightOf="@id/leftArrow"
+            android:layout_toStartOf="@id/rightArrow"
+            android:gravity="center"
+            android:onClick="optionsActivity"
+            android:text="Options"
+            android:textColor="#ff4d00"
+            android:textSize="30sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/invokerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toEndOf="@id/leftArrow"
+            android:layout_toLeftOf="@+id/rightArrow"
+            android:layout_toRightOf="@id/leftArrow"
+            android:layout_toStartOf="@id/rightArrow"
+            android:gravity="center"
+            android:onClick="invokerActivity"
+            android:text="Invoker Mode"
+            android:textColor="#ff4d00"
+            android:textSize="30sp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+        android:layout_weight="0"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+
+    </LinearLayout>
+
 </LinearLayout>
