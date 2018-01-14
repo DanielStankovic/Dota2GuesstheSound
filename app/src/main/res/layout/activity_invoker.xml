@@ -2,17 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backgroundView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.daniel.dota2guessthesound.InvokerActivity"
-    android:orientation="vertical">
+    android:background="@drawable/invoker_background"
+    android:orientation="vertical"
+    tools:context="com.example.daniel.dota2guessthesound.InvokerActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="bottom|center">
+        android:gravity="bottom|center"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/orb1"
@@ -42,8 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="top|center">
+        android:gravity="top|center"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/buttonQ"

@@ -25,7 +25,8 @@
         <activity
             android:name=".FastFingerActivity"
             android:theme="@style/playGameTheme" />
-        <activity android:name=".InvokerActivity"></activity>
+        <activity android:name=".InvokerActivity"
+            android:theme="@style/playGameTheme"/>
     </application>
 
 </manifest>

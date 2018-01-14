@@ -1,9 +1,11 @@
 package com.example.daniel.dota2guessthesound;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
 
 import com.bumptech.glide.Glide;
 
@@ -25,13 +27,14 @@ public class InvokerActivity extends AppCompatActivity {
 
     String spell;
 
-    List<String> spells = new ArrayList<String>(3);
+    List<String> spells = new ArrayList<>(3);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoker);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         buttonQ =(ImageView) findViewById(R.id.buttonQ);
         buttonW = (ImageView)findViewById(R.id.buttonW);
         buttonE =(ImageView) findViewById(R.id.buttonE);
@@ -39,7 +42,7 @@ public class InvokerActivity extends AppCompatActivity {
         ImageView  orb2 = (ImageView)findViewById(R.id.orb2);
         ImageView   orb3 =(ImageView) findViewById(R.id.orb3);
         buttonInvoke = (ImageView) findViewById(R.id.buttonInvoke);
-        orbs = new ArrayList<ImageView>(Arrays.asList(orb1, orb2,orb3));
+        orbs = new ArrayList<>(Arrays.asList(orb1, orb2,orb3));
         for (int i = 0; i < 3 ; i++) {
             spells.add(null);
 
