@@ -116,11 +116,17 @@ public class MainActivity extends ToastActivity {
         startActivity(playGameIntent);
     }
 
+    public void invokerActivity(View view){
+        Intent optionsIntent = new Intent(this, InvokerActivity.class);
+        startActivity(optionsIntent);
+    }
     public void optionsActivity(View view){
 
         Intent optionsIntent = new Intent(this, OptionsActivity.class);
         startActivity(optionsIntent);
     }
+
+
 
     public void goLeft(View view){
 
