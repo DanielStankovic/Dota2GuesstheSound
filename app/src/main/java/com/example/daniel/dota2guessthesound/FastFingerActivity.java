@@ -150,6 +150,7 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
     protected void onStop() {
         super.onStop();
         countDownTimer.cancel();
+        finish();
     }
 
 

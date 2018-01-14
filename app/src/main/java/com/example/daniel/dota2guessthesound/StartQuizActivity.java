@@ -305,4 +305,9 @@ public class StartQuizActivity extends ToastActivity {
         });
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
 }
