@@ -18,11 +18,9 @@ public class InvokerActivity extends AppCompatActivity {
     ImageView buttonE;
     ImageView buttonInvoke;
 
-    ImageView orb1;
-    ImageView orb2;
-    ImageView orb3;
 
-    ArrayList<ImageView> orbs;
+
+    private ArrayList<ImageView> orbs;
 
 
     String spell;
@@ -37,9 +35,9 @@ public class InvokerActivity extends AppCompatActivity {
         buttonQ =(ImageView) findViewById(R.id.buttonQ);
         buttonW = (ImageView)findViewById(R.id.buttonW);
         buttonE =(ImageView) findViewById(R.id.buttonE);
-        orb1 = (ImageView)findViewById(R.id.orb1);
-        orb2 = (ImageView)findViewById(R.id.orb2);
-        orb3 =(ImageView) findViewById(R.id.orb3);
+        ImageView   orb1 = (ImageView)findViewById(R.id.orb1);
+        ImageView  orb2 = (ImageView)findViewById(R.id.orb2);
+        ImageView   orb3 =(ImageView) findViewById(R.id.orb3);
         buttonInvoke = (ImageView) findViewById(R.id.buttonInvoke);
         orbs = new ArrayList<ImageView>(Arrays.asList(orb1, orb2,orb3));
         for (int i = 0; i < 3 ; i++) {
@@ -133,17 +131,17 @@ public class InvokerActivity extends AppCompatActivity {
 
     }
 
-    public void addQuasOrb(ImageView view){
+    private void addQuasOrb(ImageView view){
         Glide.with(this).load(R.drawable.quas_icon).into(view);
     }
-    public void addWexOrb(ImageView view){
+    private void addWexOrb(ImageView view){
         Glide.with(this).load(R.drawable.wex_icon).into(view);
     }
-    public void addExortOrb(ImageView view){
+    private void addExortOrb(ImageView view){
         Glide.with(this).load(R.drawable.exort_icon).into(view);
     }
 
-    public void setOrbs(){
+    private void setOrbs(){
 
 
         for (int i = 0; i < spells.size(); i++) {
