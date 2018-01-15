@@ -25,6 +25,8 @@ public class InvokerActivity extends AppCompatActivity {
     private ArrayList<ImageView> orbs;
 
 
+
+
     String spell;
 
     List<String> spells = new ArrayList<>(3);
