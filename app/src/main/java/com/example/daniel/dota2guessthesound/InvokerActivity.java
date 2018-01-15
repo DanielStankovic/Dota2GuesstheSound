@@ -195,20 +195,9 @@ public class InvokerActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "CORRECT", Toast.LENGTH_SHORT).show();
             } else {
-                if (numberOfHearts > 0) {
-                    if(numberOfHearts == 2){
-                        numberOfHearts--;
-                        heart3.setVisibility(View.INVISIBLE);
-                    }else if(numberOfHearts == 1){
-                        numberOfHearts--;
-                        heart2.setVisibility(View.INVISIBLE);
-                    }
 
-            }
-            else{
-                    Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT).show();
-                 InvokerActivity.this.finish();
-                }
+                checkHearts();
+
       }
 
         }
@@ -261,8 +250,8 @@ public class InvokerActivity extends AppCompatActivity {
         mediaPlayer.start();
         soundOrder.add(names.get(chosenSound));
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
 
                 if(soundRateCounter == 5){
                     Log.i("AAAAAA", " soundcounter je 5");
@@ -348,8 +337,10 @@ public class InvokerActivity extends AppCompatActivity {
                 if (!mediaPlayer.isPlaying()) {
                     mediaPlayer.release();
                     playSound();
+
                     if(numberOfHearts < 0 ) {
                         this.cancel();
+
                     }
                 }
             }
@@ -362,5 +353,23 @@ public class InvokerActivity extends AppCompatActivity {
         playGameContainer.setVisibility(View.VISIBLE);
         doSound(playRate);
 
+    }
+
+    private void checkHearts(){
+
+        if (numberOfHearts > 0) {
+            if(numberOfHearts == 2){
+                numberOfHearts--;
+                heart3.setVisibility(View.INVISIBLE);
+            }else if(numberOfHearts == 1){
+                numberOfHearts--;
+                heart2.setVisibility(View.INVISIBLE);
+            }
+
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT).show();
+            InvokerActivity.this.finish();
+        }
     }
 }
