@@ -1,15 +1,17 @@
 package com.example.daniel.dota2guessthesound;
 
+
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Handler;
+
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TimeUtils;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,7 +27,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
+
 
 public class InvokerActivity extends AppCompatActivity {
 
@@ -57,7 +59,7 @@ public class InvokerActivity extends AppCompatActivity {
 
     Timer timer;
 
-
+    CountDownTimer countDownTimer;
 
     boolean invokedSound = false;
 
@@ -121,6 +123,8 @@ public class InvokerActivity extends AppCompatActivity {
         super.onStop();
         timer.cancel();
         timer.purge();
+        countDownTimer.cancel();
+
 
     }
 
@@ -208,10 +212,18 @@ public class InvokerActivity extends AppCompatActivity {
             if (soundOrder.get(soundOrder.size() - 1).equals(spell)) {
 
                 Toast.makeText(getApplicationContext(), "CORRECT", Toast.LENGTH_SHORT).show();
+                invokedSound = true;
+                if(countDownTimer != null) {
+                    countDownTimer.cancel();
+                }
 
             } else {
 
                 checkHearts();
+
+                if(countDownTimer != null) {
+                    countDownTimer.cancel();
+                }
 
       }
 
@@ -261,11 +273,14 @@ public class InvokerActivity extends AppCompatActivity {
         chosenSound = random.nextInt(sounds.size());
         mediaPlayer = MediaPlayer.create(getApplicationContext(), sounds.get(chosenSound));
         mediaPlayer.start();
+
+        initiateCountDownHeartTimer();
         soundOrder.add(names.get(chosenSound));
 
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
+
 
 
                 if(soundRateCounter == 5){
@@ -351,6 +366,7 @@ public class InvokerActivity extends AppCompatActivity {
             public void run() {
                 if (!mediaPlayer.isPlaying()) {
                     mediaPlayer.release();
+                    invokedSound = false;
                    playSound();
                     if(numberOfHearts < 0 ) {
                         this.cancel();
@@ -418,7 +434,37 @@ public class InvokerActivity extends AppCompatActivity {
  });
 
 
+private void initiateCountDownHeartTimer(){
 
+    InvokerActivity.this.runOnUiThread(new Runnable() {
+        @Override
+        public void run() {
+
+
+            long totalTime = mediaPlayer.getDuration() + 2500L;
+            countDownTimer = new CountDownTimer(totalTime,1000) {
+
+                @Override
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    if(!invokedSound) {
+                       checkHearts();
+                    }
+                    this.cancel();
+
+                }
+            }.start();
+
+        }
+    });
+
+
+
+}
 
 
 
