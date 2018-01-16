@@ -50,7 +50,7 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -61,7 +61,11 @@
                 android:id="@+id/timerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="34dp"
+                android:layout_marginStart="34dp"
                 android:text="0s"
                 android:textColor="@color/toastText"
                 android:textSize="25sp" />
@@ -70,26 +74,35 @@
                 android:id="@+id/heart1Image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:layout_marginLeft="110dp"
+                android:layout_alignTop="@+id/timerTextView"
                 android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/heart2Image"
+                android:layout_toStartOf="@+id/heart2Image"
                 app:srcCompat="@drawable/heart" />
 
             <ImageView
                 android:id="@+id/heart2Image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/heart3Image"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/heart3Image"
+                android:layout_toStartOf="@+id/heart3Image"
                 app:srcCompat="@drawable/heart" />
 
             <ImageView
                 android:id="@+id/heart3Image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/heart1Image"
+                android:layout_marginEnd="37dp"
+                android:layout_marginRight="37dp"
                 app:srcCompat="@drawable/heart" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

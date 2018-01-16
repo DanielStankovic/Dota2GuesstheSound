@@ -4,6 +4,8 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,11 +53,14 @@ public class InvokerActivity extends AppCompatActivity {
     int numberOfHearts = 2;
 
 
+    int timePassed = 0;
+
     Timer timer;
 
-    CountDownTimer heartTimer;
+
 
     boolean invokedSound = false;
+
 
 
     private ArrayList<ImageView> orbs;
@@ -203,8 +208,7 @@ public class InvokerActivity extends AppCompatActivity {
             if (soundOrder.get(soundOrder.size() - 1).equals(spell)) {
 
                 Toast.makeText(getApplicationContext(), "CORRECT", Toast.LENGTH_SHORT).show();
-                invokedSound = true;
-                heartTimer.cancel();
+
             } else {
 
                 checkHearts();
@@ -258,7 +262,7 @@ public class InvokerActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), sounds.get(chosenSound));
         mediaPlayer.start();
         soundOrder.add(names.get(chosenSound));
-        invokedSound = false;
+
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
@@ -362,6 +366,7 @@ public class InvokerActivity extends AppCompatActivity {
         gameStartContainer.setVisibility(View.GONE);
         playGameContainer.setVisibility(View.VISIBLE);
         doSound(playRate);
+        startTimer();
 
 
     }
@@ -383,6 +388,36 @@ public class InvokerActivity extends AppCompatActivity {
             InvokerActivity.this.finish();
         }
     }
+
+
+
+    private void startTimer(){
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+
+                timePassed++;
+                Message msg = Message.obtain();
+                msg.obj = String.valueOf(timePassed + "s");
+                handler.sendMessage(msg);
+            }
+        },1000,1000);
+
+}
+
+ Handler handler = new Handler(new Handler.Callback() {
+     @Override
+     public boolean handleMessage(Message msg) {
+
+         timerTextView.setText(msg.obj.toString());
+
+         return true;
+     }
+ });
+
+
 
 
 
