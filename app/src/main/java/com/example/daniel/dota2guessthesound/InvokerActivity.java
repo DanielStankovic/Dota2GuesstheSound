@@ -3,9 +3,11 @@ package com.example.daniel.dota2guessthesound;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TimeUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class InvokerActivity extends AppCompatActivity {
 
@@ -47,7 +50,12 @@ public class InvokerActivity extends AppCompatActivity {
     int soundRateCounter =1;
     int numberOfHearts = 2;
 
+
     Timer timer;
+
+    CountDownTimer heartTimer;
+
+    boolean invokedSound = false;
 
 
     private ArrayList<ImageView> orbs;
@@ -100,6 +108,7 @@ public class InvokerActivity extends AppCompatActivity {
                     }
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.invoker_mode_alacrity);
+
     }
 
     @Override
@@ -194,6 +203,8 @@ public class InvokerActivity extends AppCompatActivity {
             if (soundOrder.get(soundOrder.size() - 1).equals(spell)) {
 
                 Toast.makeText(getApplicationContext(), "CORRECT", Toast.LENGTH_SHORT).show();
+                invokedSound = true;
+                heartTimer.cancel();
             } else {
 
                 checkHearts();
@@ -233,8 +244,6 @@ public class InvokerActivity extends AppCompatActivity {
         }
     }
 
-
-
     private void setFonts(){
 
         Typeface scoreFont = Typeface.createFromAsset(getAssets(),"fonts/score_font.ttf" );
@@ -249,9 +258,11 @@ public class InvokerActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), sounds.get(chosenSound));
         mediaPlayer.start();
         soundOrder.add(names.get(chosenSound));
+        invokedSound = false;
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
+
 
                 if(soundRateCounter == 5){
                     Log.i("AAAAAA", " soundcounter je 5");
@@ -336,8 +347,7 @@ public class InvokerActivity extends AppCompatActivity {
             public void run() {
                 if (!mediaPlayer.isPlaying()) {
                     mediaPlayer.release();
-                    playSound();
-
+                   playSound();
                     if(numberOfHearts < 0 ) {
                         this.cancel();
 
@@ -352,6 +362,7 @@ public class InvokerActivity extends AppCompatActivity {
         gameStartContainer.setVisibility(View.GONE);
         playGameContainer.setVisibility(View.VISIBLE);
         doSound(playRate);
+
 
     }
 
@@ -372,4 +383,8 @@ public class InvokerActivity extends AppCompatActivity {
             InvokerActivity.this.finish();
         }
     }
+
+
+
+
 }
