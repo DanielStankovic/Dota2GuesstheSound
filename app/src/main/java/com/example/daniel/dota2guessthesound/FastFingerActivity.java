@@ -11,7 +11,6 @@ import android.os.CountDownTimer;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,7 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
@@ -115,7 +113,7 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
 
         timerTextView = (TextView)findViewById(R.id.timerTextView);
         scoreTextView = (TextView)findViewById(R.id.scoreTextView);
-        resultTextView = (TextView)findViewById(R.id.resultTextView);
+        resultTextView = (TextView)findViewById(R.id.invokerResultTextView);
 
         button0 = (Button)findViewById(R.id.button0);
         button1 = (Button)findViewById(R.id.button1);
@@ -212,7 +210,7 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
 
         if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))){
 
-            showCheckAnswerToast("CORRECT!", Color.GREEN );
+            showCheckAnswerToast("CORRECT!", Color.GREEN, -50 );
             alreadyUsedSounds.add(names.get(chosenSound));
             score++;
 
@@ -220,7 +218,7 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
 
 
         } else{
-            showCheckAnswerToast("WRONG!", Color.RED );
+            showCheckAnswerToast("WRONG!", Color.RED, -50 );
 
 
         }

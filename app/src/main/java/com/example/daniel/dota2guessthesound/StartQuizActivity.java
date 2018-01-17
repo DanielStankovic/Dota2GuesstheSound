@@ -9,7 +9,6 @@ import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 
@@ -118,7 +117,7 @@ public class StartQuizActivity extends ToastActivity {
         button3 = (Button)findViewById(R.id.button3);
         image = (ImageView)findViewById(R.id.imageView);
         scoreTextView = (TextView)findViewById(R.id.scoreTextView);
-        resultTextView = (TextView)findViewById(R.id.resultTextView);
+        resultTextView = (TextView)findViewById(R.id.invokerResultTextView);
         playAgainButton = (Button)findViewById(R.id.playAgainButton);
         highScoreTextView = (TextView)findViewById(R.id.highScoreTextView);
 
@@ -221,7 +220,7 @@ public class StartQuizActivity extends ToastActivity {
 
         if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))){
 
-            showCheckAnswerToast("CORRECT!", Color.GREEN );
+            showCheckAnswerToast("CORRECT!", Color.GREEN, -50 );
             alreadyUsedSounds.add(names.get(chosenSound));
             score++;
             generateQuestion();
@@ -231,7 +230,7 @@ public class StartQuizActivity extends ToastActivity {
         } else{
 
             showInterstitialAd();
-            showCheckAnswerToast("WRONG!", Color.RED );
+            showCheckAnswerToast("WRONG!", Color.RED, -50 );
             showGameOverScreen();
 
         }
@@ -272,17 +271,19 @@ public class StartQuizActivity extends ToastActivity {
         playAgainLayout.setVisibility(View.VISIBLE);
         resultTextView.setText("Your score is: " + score);
 
-        if(score > highScore){
-            highScore = score;
+        setHighScore(score, highScore, settings, highScoreTextView, "startQuizHighScore");
 
-
-            settings.edit().putString("highScore",Integer.toString(highScore)).apply();
-
-        }
-
-        String highScore = settings.getString("highScore", Integer.toString(0));
-
-        highScoreTextView.setText("Highscore: " + highScore);
+//        if(score > highScore){
+//            highScore = score;
+//
+//
+//            settings.edit().putString("highScore",Integer.toString(highScore)).apply();
+//
+//        }
+//
+//        String highScore = settings.getString("highScore", Integer.toString(0));
+//
+//        highScoreTextView.setText("Highscore: " + highScore);
 
     }
 

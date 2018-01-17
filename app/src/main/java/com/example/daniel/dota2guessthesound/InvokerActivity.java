@@ -1,20 +1,24 @@
 package com.example.daniel.dota2guessthesound;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Handler;
 
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,8 +49,13 @@ public class InvokerActivity extends ToastActivity {
     TextView timerTextView;
     TextView welcomeTextView;
 
+    TextView highScoreTextView;
+    TextView resultTextView;
+
+
     LinearLayout gameStartContainer;
     LinearLayout playGameContainer;
+    RelativeLayout gameOverContainer;
 
     MediaPlayer mediaPlayer;
     int chosenSound;
@@ -58,6 +67,9 @@ public class InvokerActivity extends ToastActivity {
 
 
     int timePassed = 0;
+    int highScore = 0;
+
+    SharedPreferences settings;
 
     Timer timer;
 
@@ -101,15 +113,20 @@ public class InvokerActivity extends ToastActivity {
 
         gameStartContainer = (LinearLayout)findViewById(R.id.gameStartContainer);
         playGameContainer = (LinearLayout)findViewById(R.id.playGameContainer);
+        gameOverContainer = (RelativeLayout)findViewById(R.id.gameOverContainer);
 
         timerTextView = (TextView)findViewById(R.id.timerTextView);
         welcomeTextView = (TextView)findViewById(R.id.welcomeTextView);
+        highScoreTextView = (TextView)findViewById(R.id.invokerHighScoreTextView);
+        resultTextView = (TextView)findViewById(R.id.invokerResultTextView);
 
         random = new Random();
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setFonts();
+
+        settings = this.getSharedPreferences("com.example.daniel.dota2guessthesound", Context.MODE_PRIVATE);
 
         orbs = new ArrayList<>(Arrays.asList(orb1, orb2,orb3));
 
@@ -222,7 +239,7 @@ public class InvokerActivity extends ToastActivity {
 
             if (soundOrder.get(soundOrder.size() - 1).equals(spell)) {
 
-                Toast.makeText(getApplicationContext(), "CORRECT", Toast.LENGTH_SHORT).show();
+                showCheckAnswerToast("CORRECT!", Color.GREEN, 25 );
                 invokedSound = true;
                 if(countDownTimer != null) {
                     countDownTimer.cancel();
@@ -230,6 +247,7 @@ public class InvokerActivity extends ToastActivity {
 
             } else {
 
+                showCheckAnswerToast("WRONG!", Color.RED, 25 );
                 checkHearts();
 
                 if(countDownTimer != null) {
@@ -277,6 +295,8 @@ public class InvokerActivity extends ToastActivity {
         timerTextView.setTypeface(scoreFont);
         welcomeTextView.setTypeface(scoreFont);
         timerTextView.setTypeface(scoreFont);
+        highScoreTextView.setTypeface(scoreFont);
+        resultTextView.setTypeface(scoreFont);
     }
 
     public void playSound(){
@@ -295,14 +315,14 @@ public class InvokerActivity extends ToastActivity {
 
 
                 if(soundRateCounter == 5){
-                    Log.i("AAAAAA", " soundcounter je 5");
+
                     timer.cancel();
                     timer.purge();
                     playRate = 6000;
                     doSound(playRate);
                 }
                 if(soundRateCounter == 10){
-                    Log.i("AAAAAA", " soundcounter je 10");
+
                     timer.cancel();
                     timer.purge();
                     playRate = 5000;
@@ -311,7 +331,7 @@ public class InvokerActivity extends ToastActivity {
                 }
 
                 if(soundRateCounter == 15){
-                    Log.i("AAAAAA", " soundcounter je 15");
+
                     timer.cancel();
                     timer.purge();
                     playRate = 4000;
@@ -320,7 +340,7 @@ public class InvokerActivity extends ToastActivity {
                 }
 
                 if(soundRateCounter == 20){
-                    Log.i("AAAAAA", " soundcounter je 20");
+
                     timer.cancel();
                     timer.purge();
                     playRate = 3000;
@@ -329,7 +349,7 @@ public class InvokerActivity extends ToastActivity {
                 }
 
                 if(soundRateCounter == 25){
-                    Log.i("AAAAAA", " soundcounter je 25");
+
                     timer.cancel();
                     timer.purge();
                     playRate = 2000;
@@ -338,7 +358,7 @@ public class InvokerActivity extends ToastActivity {
                 }
 
                 if(soundRateCounter == 30){
-                    Log.i("AAAAAA", " soundcounter je 30");
+
                     timer.cancel();
                     timer.purge();
                     playRate = 1000;
@@ -347,7 +367,7 @@ public class InvokerActivity extends ToastActivity {
                 }
 
                 if(soundRateCounter == 35){
-                    Log.i("AAAAAA", " soundcounter je 35");
+
                     timer.cancel();
                     timer.purge();
                     playRate = 500;
@@ -355,7 +375,7 @@ public class InvokerActivity extends ToastActivity {
 
                 }
                 if(soundRateCounter == 40){
-                    Log.i("AAAAAA", " soundcounter je 40");
+
                     timer.cancel();
                     timer.purge();
                     playRate = 250;
@@ -411,9 +431,12 @@ public class InvokerActivity extends ToastActivity {
 
         }
         else{
-            Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT).show();
+            timer.cancel();
             showInterstitialAd(mInterstitialAd);
-            InvokerActivity.this.finish();
+            showGameOverScreen();
+
+
+
         }
     }
 
@@ -478,6 +501,23 @@ private void initiateCountDownHeartTimer(){
 
 }
 
+    public void backToMenu(View view){
+        InvokerActivity.this.finish();
+    }
+
+    private void showGameOverScreen(){
+
+        countDownTimer.cancel();
+        handler.removeCallbacksAndMessages(null);
+        mediaPlayer.release();
+
+        playGameContainer.setVisibility(View.GONE);
+        gameOverContainer.setVisibility(View.VISIBLE);
+        resultTextView.setText("You survived for " + timePassed + " seconds");
+
+        setHighScore(timePassed, highScore, settings, highScoreTextView, "invokerModeHighScore");
+
+    }
 
 
 }

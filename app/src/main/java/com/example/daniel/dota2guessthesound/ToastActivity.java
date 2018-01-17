@@ -1,5 +1,6 @@
 package com.example.daniel.dota2guessthesound;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.ColorInt;
@@ -44,7 +45,7 @@ public class ToastActivity extends AppCompatActivity {
         toast.show();
     }
 
-    public void showCheckAnswerToast(CharSequence message, int colorId ){
+    public void showCheckAnswerToast(CharSequence message, int colorId, int YTextPosition ){
         LayoutInflater layoutInflater = getLayoutInflater();
         View layout = layoutInflater.inflate(R.layout.custome_toast, (ViewGroup)findViewById(R.id.custom_toast_layout));
         layout.setBackgroundColor(ContextCompat.getColor(this, R.color.answersBackgroundColor));
@@ -60,7 +61,7 @@ public class ToastActivity extends AppCompatActivity {
         }
 
         toast = new Toast(this);
-        toast.setGravity(Gravity.CENTER, 0, -50);
+        toast.setGravity(Gravity.CENTER, 0, YTextPosition);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(layout);
         toast.show();
@@ -88,5 +89,21 @@ public class ToastActivity extends AppCompatActivity {
         });
     }
 
+    public void setHighScore(int score, int highScore, SharedPreferences settings, TextView highScoreTextView, String highscoreMode){
+
+        if(score > highScore){
+            highScore = score;
+
+
+            settings.edit().putString(highscoreMode,Integer.toString(highScore)).apply();
+
+        }
+
+        String oldHighScore = settings.getString(highscoreMode, Integer.toString(0));
+
+        highScoreTextView.setText("Highscore: " + oldHighScore);
+
+
+    }
 
 }
