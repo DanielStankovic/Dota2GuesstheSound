@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +31,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class InvokerActivity extends AppCompatActivity {
+public class InvokerActivity extends ToastActivity {
 
     ImageView buttonQ;
     ImageView buttonW;
@@ -50,7 +52,7 @@ public class InvokerActivity extends AppCompatActivity {
     int chosenSound;
     Random random;
 
-    long playRate = 5000;
+    long playRate = 7000;
     int soundRateCounter =1;
     int numberOfHearts = 2;
 
@@ -62,6 +64,8 @@ public class InvokerActivity extends AppCompatActivity {
     CountDownTimer countDownTimer;
 
     boolean invokedSound = false;
+
+    InterstitialAd mInterstitialAd;
 
 
 
@@ -116,6 +120,10 @@ public class InvokerActivity extends AppCompatActivity {
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.invoker_mode_alacrity);
 
+        mInterstitialAd = new InterstitialAd(getApplicationContext());
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
     }
 
     @Override
@@ -124,6 +132,7 @@ public class InvokerActivity extends AppCompatActivity {
         timer.cancel();
         timer.purge();
         countDownTimer.cancel();
+
 
 
     }
@@ -159,15 +168,17 @@ public class InvokerActivity extends AppCompatActivity {
             int exortOrbNumber = 0;
 
             for (int i = 0; i < 3; i++) {
+                if(spells.get(i) != null) {
 
-                if (spells.get(i).equals("Q")) {
-                    quasOrbNumber = quasOrbNumber + 1;
-                } else if (spells.get(i).equals("W")) {
-                    wexOrbNumber = wexOrbNumber + 1;
-                } else if (spells.get(i).equals("E")) {
-                    exortOrbNumber = exortOrbNumber + 1;
+                    if (spells.get(i).equals("Q")) {
+                        quasOrbNumber = quasOrbNumber + 1;
+                    } else if (spells.get(i).equals("W")) {
+                        wexOrbNumber = wexOrbNumber + 1;
+                    } else if (spells.get(i).equals("E")) {
+                        exortOrbNumber = exortOrbNumber + 1;
+                    }
+
                 }
-
 
             }
 
@@ -401,6 +412,7 @@ public class InvokerActivity extends AppCompatActivity {
         }
         else{
             Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT).show();
+            showInterstitialAd(mInterstitialAd);
             InvokerActivity.this.finish();
         }
     }

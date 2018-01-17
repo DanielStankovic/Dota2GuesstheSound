@@ -263,7 +263,7 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
 
                 timerTextView.setText("0s");
                 mediaPlayer.release();
-                showInterstitialAd();
+                showInterstitialAd(mInterstitialAd);
                 showGameOverScreen();
                 alreadyUsedSounds.clear();
 
@@ -319,22 +319,8 @@ public void setFonts(){
         newFragment.dismiss();
     }
 
-    public void showInterstitialAd (){
-
-        if(mInterstitialAd.isLoaded()){
-            mInterstitialAd.show();
-        } else{
-
-
-            Log.i("TAG ADD", "Add not loaded yet.");
-        }
-
-        mInterstitialAd.setAdListener(new AdListener(){
-
-            @Override
-            public void onAdClosed() {
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-        });
+    public void backToMenu(View view){
+        FastFingerActivity.this.finish();
     }
+
 }

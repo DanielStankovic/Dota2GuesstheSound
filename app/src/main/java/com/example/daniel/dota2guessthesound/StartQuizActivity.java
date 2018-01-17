@@ -305,6 +305,10 @@ public class StartQuizActivity extends ToastActivity {
         });
     }
 
+    public void backToMenu(View view){
+        StartQuizActivity.this.finish();
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
