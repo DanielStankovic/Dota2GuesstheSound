@@ -301,6 +301,10 @@ public class InvokerActivity extends ToastActivity {
 
     public void playSound(){
 
+
+
+
+
         chosenSound = random.nextInt(sounds.size());
         mediaPlayer = MediaPlayer.create(getApplicationContext(), sounds.get(chosenSound));
         mediaPlayer.start();
