@@ -404,8 +404,9 @@ public class InvokerActivity extends ToastActivity {
 
                     }
                 }
+
             }
-        }, 0, playRate);
+        }, 1000, playRate);
 
     }
 
