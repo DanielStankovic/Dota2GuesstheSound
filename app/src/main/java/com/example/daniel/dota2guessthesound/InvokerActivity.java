@@ -239,7 +239,7 @@ public class InvokerActivity extends ToastActivity {
 
             if (soundOrder.get(soundOrder.size() - 1).equals(spell)) {
 
-                showCheckAnswerToast("CORRECT!", Color.GREEN, 25 );
+                showCheckAnswerToast("CORRECT!", Color.GREEN, 50 );
                 invokedSound = true;
                 if(countDownTimer != null) {
                     countDownTimer.cancel();
@@ -247,7 +247,7 @@ public class InvokerActivity extends ToastActivity {
 
             } else {
 
-                showCheckAnswerToast("WRONG!", Color.RED, 25 );
+                showCheckAnswerToast("WRONG!", Color.RED, 50 );
                 checkHearts();
 
                 if(countDownTimer != null) {
@@ -300,10 +300,6 @@ public class InvokerActivity extends ToastActivity {
     }
 
     public void playSound(){
-
-
-
-
 
         chosenSound = random.nextInt(sounds.size());
         mediaPlayer = MediaPlayer.create(getApplicationContext(), sounds.get(chosenSound));

@@ -71,7 +71,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:gravity="center"
-            android:text="Welcome to the Invoker Mode. The rules are simple.  Listen and Invoke the sounds that you hear in the correct order.  As the time goes on you will have to Invoke faster. Survive as long as you can! Good luck!"
+            android:text="Welcome to the Invoker Mode. The rules are simple.  Listen and Invoke the sounds that you hear in the correct order.  As the time goes on, you will have to Invoke faster. Survive as long as you can! Good luck!"
             android:textAlignment="center"
             android:textColor="@color/toastText"
             android:textSize="18sp" />
