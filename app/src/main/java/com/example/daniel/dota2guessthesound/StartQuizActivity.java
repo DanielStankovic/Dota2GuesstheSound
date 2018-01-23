@@ -37,6 +37,7 @@ public class StartQuizActivity extends ToastActivity {
     int chosenSound;
     int score = 0;
     int highScore = 0;
+    int coinChance;
 
     MediaPlayer  mediaPlayer;
 
@@ -218,10 +219,16 @@ public class StartQuizActivity extends ToastActivity {
 
     public void chooseSound(View view) throws InterruptedException {
 
+        Random random = new Random();
+        coinChance = random.nextInt(100);
         if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))){
 
             showCheckAnswerToast("CORRECT!", Color.GREEN, -50 );
-            showCoinRewardToast(R.drawable.ten_coin);
+            if(coinChance <= 15) {
+                showCoinRewardToast(R.drawable.two_coin);
+                setCoinValue(settings, 2);
+
+            }
             alreadyUsedSounds.add(names.get(chosenSound));
             score++;
             generateQuestion();
@@ -230,9 +237,9 @@ public class StartQuizActivity extends ToastActivity {
 
         } else{
 
-          //  showInterstitialAd();
+            showInterstitialAd();
 
-            //showCheckAnswerToast("WRONG!", Color.RED, -50 );
+            showCheckAnswerToast("WRONG!", Color.RED, -50 );
             showGameOverScreen();
 
         }
@@ -274,18 +281,6 @@ public class StartQuizActivity extends ToastActivity {
         resultTextView.setText("Your score is: " + score);
 
         setHighScore(score, highScore, settings, highScoreTextView, "startQuizHighScore");
-
-//        if(score > highScore){
-//            highScore = score;
-//
-//
-//            settings.edit().putString("highScore",Integer.toString(highScore)).apply();
-//
-//        }
-//
-//        String highScore = settings.getString("highScore", Integer.toString(0));
-//
-//        highScoreTextView.setText("Highscore: " + highScore);
 
     }
 

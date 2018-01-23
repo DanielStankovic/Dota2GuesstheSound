@@ -2,6 +2,7 @@ package com.example.daniel.dota2guessthesound;
 
 import android.content.SharedPreferences;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 
 import android.support.v4.content.ContextCompat;
@@ -107,7 +108,9 @@ public class ToastActivity extends AppCompatActivity {
             @Override
             public void onAdClosed() {
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
             }
+
         });
     }
 
@@ -125,6 +128,32 @@ public class ToastActivity extends AppCompatActivity {
 
         highScoreTextView.setText("Highscore: " + oldHighScore);
 
+
+    }
+
+    public void setCoinValue(SharedPreferences settings, int value){
+        int currentCoinValue = settings.getInt("coinValue", 0);
+
+        settings.edit().putInt("coinValue", currentCoinValue + value).apply();
+    }
+
+    public void getCoinValue(SharedPreferences settings, TextView coinTextView){
+
+        int currentCoinValue = settings.getInt("coinValue", 0);
+        coinTextView.setText(String.valueOf(currentCoinValue));
+    }
+
+    public boolean checkCoinValue(SharedPreferences settings){
+        int value = settings.getInt("coinValue", 0);
+
+        if(value < 50){
+            showCheckAnswerToast("50 coins needed", Color.RED, 100);
+            return false;
+        } else{
+            value = value - 50;
+            settings.edit().putInt("coinValue",value).apply();
+            return true;
+        }
 
     }
 

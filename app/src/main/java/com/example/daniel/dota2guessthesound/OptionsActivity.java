@@ -1,6 +1,7 @@
 package com.example.daniel.dota2guessthesound;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.media.AudioManager;
@@ -25,6 +26,7 @@ public class OptionsActivity extends ToastActivity {
     private AudioManager audioManager = null;
     TextView volumeText;
     RewardedVideoAd mRewardedVideoAd;
+    SharedPreferences settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class OptionsActivity extends ToastActivity {
         setContentView(R.layout.activity_options);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         volumeText  = (TextView)findViewById(R.id.volumeText);
-
+        settings = this.getSharedPreferences("com.example.daniel.dota2guessthesound", Context.MODE_PRIVATE);
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
             @Override
@@ -60,6 +62,7 @@ public class OptionsActivity extends ToastActivity {
             public void onRewarded(RewardItem rewardItem) {
 
                 showCoinRewardToast(R.drawable.twenty_coin);
+                setCoinValue(settings, 20);
 
             }
 

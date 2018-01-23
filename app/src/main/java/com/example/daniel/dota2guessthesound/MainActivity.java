@@ -1,6 +1,8 @@
 package com.example.daniel.dota2guessthesound;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 
 import android.graphics.Typeface;
@@ -33,6 +35,7 @@ public class MainActivity extends ToastActivity {
     TextView optionsTextView;
     TextView fastFingersTextView;
     TextView invokerTextView;
+    TextView coinTextView;
 
     AdView mAdView;
 
@@ -43,6 +46,8 @@ public class MainActivity extends ToastActivity {
     ImageView leftArrow;
     ImageView rightArrow;
 
+    SharedPreferences settings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,7 @@ public class MainActivity extends ToastActivity {
         optionsTextView = (TextView)findViewById(R.id.optionsTextView);
         fastFingersTextView = (TextView)findViewById(R.id.fastFingerTextView);
         invokerTextView = (TextView)findViewById(R.id.invokerTextView);
+        coinTextView = (TextView)findViewById(R.id.coinTextView);
 
         leftArrow = (ImageView)findViewById(R.id.leftArrow);
         rightArrow = (ImageView)findViewById(R.id.rightArrow);
@@ -64,6 +70,11 @@ public class MainActivity extends ToastActivity {
         optionsTextView.setTypeface(font);
         fastFingersTextView.setTypeface(font);
         invokerTextView.setTypeface(font);
+        coinTextView.setTypeface(font);
+
+        settings = this.getSharedPreferences("com.example.daniel.dota2guessthesound", Context.MODE_PRIVATE);
+
+        getCoinValue(settings, coinTextView);
 
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
         mAdView = (AdView)findViewById(R.id.adView);
@@ -71,6 +82,12 @@ public class MainActivity extends ToastActivity {
         mAdView.loadAd(adRequest);
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getCoinValue(settings, coinTextView);
     }
 
     @Override
@@ -117,8 +134,10 @@ public class MainActivity extends ToastActivity {
     }
 
     public void invokerActivity(View view){
-        Intent optionsIntent = new Intent(this, InvokerActivity.class);
-        startActivity(optionsIntent);
+        if(checkCoinValue(settings)) {
+            Intent optionsIntent = new Intent(this, InvokerActivity.class);
+            startActivity(optionsIntent);
+        }
     }
     public void optionsActivity(View view){
 
@@ -223,5 +242,11 @@ public class MainActivity extends ToastActivity {
 
             }
         });
+    }
+
+    public void showCoinToast(View view){
+
+        String coinToast = "Win coins by:\n-Playing the Quiz\n-Playing Fast Finger mode\n-Watching videos inside Options";
+        showInfoToast(coinToast);
     }
 }

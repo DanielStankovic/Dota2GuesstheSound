@@ -2,6 +2,8 @@ package com.example.daniel.dota2guessthesound;
 
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -19,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
@@ -42,7 +45,7 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
 
     int chosenSound;
 
-    int highScore = 0;
+    long coinChance;
 
     MediaPlayer mediaPlayer;
 
@@ -64,6 +67,7 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
     InterstitialAd mInterstitialAd;
 
     CountDownTimer countDownTimer;
+    SharedPreferences settings;
 
 
     ArrayList<Integer> sounds = new ArrayList<Integer>(Arrays.<Integer>asList(R.raw.astral_spirit, R.raw.charge_of_darkness,
@@ -127,6 +131,7 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
         playAgainLayout = (RelativeLayout)findViewById(R.id.playAgainLayout);
         soundAndScoreLayout= (RelativeLayout)findViewById(R.id.relativeLayout1);
         buttonsLayout = (LinearLayout)findViewById(R.id.linearLayout1);
+        settings = this.getSharedPreferences("com.example.daniel.dota2guessthesound", Context.MODE_PRIVATE);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -207,10 +212,16 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
     }
 
     public void chooseSound(View view) throws InterruptedException {
+        Random random = new Random();
+        coinChance = random.nextInt(100);
 
         if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))){
 
             showCheckAnswerToast("CORRECT!", Color.GREEN, -50 );
+            if(coinChance <= 10){
+                showCoinRewardToast(R.drawable.one_coin);
+                setCoinValue(settings, 1);
+            }
             alreadyUsedSounds.add(names.get(chosenSound));
             score++;
 
@@ -262,6 +273,17 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
                 timerTextView.setText("0s");
                 mediaPlayer.release();
                 showInterstitialAd(mInterstitialAd);
+
+                if(timer == 30200){
+                    showCoinRewardToast(R.drawable.five_coin);
+                    setCoinValue(settings, 5);
+                }else if(timer == 60200){
+                    showCoinRewardToast(R.drawable.ten_coin);
+                    setCoinValue(settings, 10);
+                }else if(timer == 90200){
+                    showCoinRewardToast(R.drawable.fifteen_coin);
+                    setCoinValue(settings, 15);
+                }
                 showGameOverScreen();
                 alreadyUsedSounds.clear();
 
@@ -277,17 +299,6 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
         playAgainLayout.setVisibility(View.VISIBLE);
         resultTextView.setText("Your score is: " + score + "/" + numberOfQuestionsTextView);
 
-     //   if(score > highScore){
-     //       highScore = score;
-
-
-           // settings.edit().putString("highScore",Integer.toString(highScore)).apply();
-
-     //   }
-
-      //  String highScore = settings.getString("highScore", Integer.toString(0));
-
-    //    highScoreTextView.setText("Highscore: " + highScore);
 
     }
 
