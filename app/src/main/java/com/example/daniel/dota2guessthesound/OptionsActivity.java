@@ -19,7 +19,7 @@ import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import org.w3c.dom.Text;
 
-public class OptionsActivity extends AppCompatActivity {
+public class OptionsActivity extends ToastActivity {
 
     SeekBar seekBar = null;
     private AudioManager audioManager = null;
@@ -59,6 +59,7 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onRewarded(RewardItem rewardItem) {
 
+                showCoinRewardToast(R.drawable.twenty_coin);
 
             }
 

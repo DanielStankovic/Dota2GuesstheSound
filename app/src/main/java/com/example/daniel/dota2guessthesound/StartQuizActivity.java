@@ -221,6 +221,7 @@ public class StartQuizActivity extends ToastActivity {
         if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))){
 
             showCheckAnswerToast("CORRECT!", Color.GREEN, -50 );
+            showCoinRewardToast(R.drawable.ten_coin);
             alreadyUsedSounds.add(names.get(chosenSound));
             score++;
             generateQuestion();
@@ -229,8 +230,9 @@ public class StartQuizActivity extends ToastActivity {
 
         } else{
 
-            showInterstitialAd();
-            showCheckAnswerToast("WRONG!", Color.RED, -50 );
+          //  showInterstitialAd();
+
+            //showCheckAnswerToast("WRONG!", Color.RED, -50 );
             showGameOverScreen();
 
         }

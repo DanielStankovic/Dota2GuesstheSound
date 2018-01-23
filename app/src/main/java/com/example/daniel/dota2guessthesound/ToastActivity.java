@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +68,27 @@ public class ToastActivity extends AppCompatActivity {
         toast.show();
 
 
+
+    }
+
+    public void showCoinRewardToast(int imageResource){
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View layout = layoutInflater.inflate(R.layout.coin_layout, (ViewGroup)findViewById(R.id.coin_reward_layout));
+        layout.setBackgroundColor(ContextCompat.getColor(this, R.color.answersBackgroundColor));
+
+        ImageView imageView = (ImageView)layout.findViewById(R.id.coinImageView);
+        imageView.setImageResource(imageResource);
+
+        if(toast != null){
+            toast.cancel();
+        }
+
+
+        toast = new Toast(this);
+        toast.setGravity(Gravity.CENTER, 0, -50);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
 
     }
 
