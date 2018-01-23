@@ -1,12 +1,12 @@
 package com.example.daniel.dota2guessthesound;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
+
 import android.graphics.Typeface;
-import android.support.annotation.ColorInt;
+
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;

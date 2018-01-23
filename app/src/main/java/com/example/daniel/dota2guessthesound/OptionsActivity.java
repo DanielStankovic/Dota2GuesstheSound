@@ -6,16 +6,25 @@ import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import org.w3c.dom.Text;
 
 public class OptionsActivity extends AppCompatActivity {
 
-    private SeekBar seekBar = null;
+    SeekBar seekBar = null;
     private AudioManager audioManager = null;
-    private TextView volumeText;
+    TextView volumeText;
+    RewardedVideoAd mRewardedVideoAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +32,49 @@ public class OptionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_options);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         volumeText  = (TextView)findViewById(R.id.volumeText);
+
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+        mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+            @Override
+            public void onRewardedVideoAdLoaded() {
+
+            }
+
+            @Override
+            public void onRewardedVideoAdOpened() {
+
+            }
+
+            @Override
+            public void onRewardedVideoStarted() {
+
+            }
+
+            @Override
+            public void onRewardedVideoAdClosed() {
+
+                mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
+            }
+
+            @Override
+            public void onRewarded(RewardItem rewardItem) {
+
+
+            }
+
+            @Override
+            public void onRewardedVideoAdLeftApplication() {
+
+            }
+
+            @Override
+            public void onRewardedVideoAdFailedToLoad(int i) {
+
+                Toast.makeText(OptionsActivity.this, "Video is not ready yet.", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
@@ -64,5 +116,13 @@ public class OptionsActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void showAdVideo(View view){
+
+        if(mRewardedVideoAd.isLoaded()){
+            mRewardedVideoAd.show();
+        }
+
     }
 }

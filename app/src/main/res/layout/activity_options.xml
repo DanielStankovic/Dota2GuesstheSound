@@ -31,4 +31,15 @@
         android:thumb="@drawable/seekbar_icon"
         android:progressDrawable="@drawable/seekbar_progressbar"
         android:thumbTintMode="multiply" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:onClick="showAdVideo"
+        android:scaleY="0.8"
+        app:srcCompat="@drawable/watch_video_button" />
 </RelativeLayout>
