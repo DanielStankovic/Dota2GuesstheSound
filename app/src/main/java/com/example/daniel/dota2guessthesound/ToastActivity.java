@@ -1,11 +1,13 @@
 package com.example.daniel.dota2guessthesound;
 
+
 import android.content.SharedPreferences;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
 
 import android.support.v4.content.ContextCompat;
+
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
@@ -156,5 +158,7 @@ public class ToastActivity extends AppCompatActivity {
         }
 
     }
+
+
 
 }

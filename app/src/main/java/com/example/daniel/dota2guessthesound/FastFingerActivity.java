@@ -3,6 +3,7 @@ package com.example.daniel.dota2guessthesound;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -13,15 +14,16 @@ import android.os.CountDownTimer;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
+
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
@@ -165,50 +167,51 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
         }
     }
 
-    public void generateQuestion(){
+    public void generateQuestion() {
 
         Random random = new Random();
         chosenSound = random.nextInt(sounds.size());
 
         if (alreadyUsedSounds.size() == names.size()) {
 
-            //ovde se desi nesto kad se svi zvukovi potrose.
+            showNoMoreQuestionsDialog();
 
-            Toast.makeText(getApplicationContext(), "You used all the sounds!!!", Toast.LENGTH_SHORT).show();
-            return;
-        } else{
 
-            while(alreadyUsedSounds.contains(names.get(chosenSound))) {
+
+        } else {
+
+            while (alreadyUsedSounds.contains(names.get(chosenSound))) {
                 chosenSound = random.nextInt(sounds.size());
             }
-        }
-        locationOfCorrectAnswer = random.nextInt(4);
-        int incorrectAnswerLocation;
 
-        for (int i = 0; i <4 ; i++) {
-            if(i == locationOfCorrectAnswer){
+            locationOfCorrectAnswer = random.nextInt(4);
+            int incorrectAnswerLocation;
 
-                answers[i] = names.get(chosenSound);
+            for (int i = 0; i < 4; i++) {
+                if (i == locationOfCorrectAnswer) {
 
-            } else{
+                    answers[i] = names.get(chosenSound);
 
-                incorrectAnswerLocation = random.nextInt(sounds.size());
+                } else {
 
-                while (incorrectAnswerLocation == chosenSound || Arrays.asList(answers).contains(names.get(incorrectAnswerLocation))){
                     incorrectAnswerLocation = random.nextInt(sounds.size());
+
+                    while (incorrectAnswerLocation == chosenSound || Arrays.asList(answers).contains(names.get(incorrectAnswerLocation))) {
+                        incorrectAnswerLocation = random.nextInt(sounds.size());
+                    }
+
+
+                    answers[i] = names.get(incorrectAnswerLocation);
                 }
-
-
-                answers[i] = names.get(incorrectAnswerLocation);
             }
-        }
-        button0.setText(answers[0]);
-        button1.setText(answers[1]);
-        button2.setText(answers[2]);
-        button3.setText(answers[3]);
-        mediaPlayer = MediaPlayer.create(this, sounds.get(chosenSound));
-        mediaPlayer.start();
+            button0.setText(answers[0]);
+            button1.setText(answers[1]);
+            button2.setText(answers[2]);
+            button3.setText(answers[3]);
+            mediaPlayer = MediaPlayer.create(this, sounds.get(chosenSound));
+            mediaPlayer.start();
 
+        }
     }
 
     public void chooseSound(View view) throws InterruptedException {
@@ -330,6 +333,30 @@ public void setFonts(){
 
     public void backToMenu(View view){
         FastFingerActivity.this.finish();
+    }
+
+    private  void showNoMoreQuestionsDialog(){
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Congratulations!");
+        alertDialogBuilder.setMessage("You have answered all the sounds!\nSoon we will add more sounds and new modes!\nStay tuned!");
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                playAgain(findViewById(R.id.playAgainButton));
+            }
+        });
+
+        alertDialogBuilder.setNeutralButton("Back to Menu", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                backToMenu(findViewById(R.id.goBackImageView));
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
 }

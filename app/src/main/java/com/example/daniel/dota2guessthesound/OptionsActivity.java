@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.media.AudioManager;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
@@ -18,7 +18,7 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
-import org.w3c.dom.Text;
+
 
 public class OptionsActivity extends ToastActivity {
 

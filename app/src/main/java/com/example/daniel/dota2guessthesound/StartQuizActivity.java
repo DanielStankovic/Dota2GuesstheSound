@@ -1,6 +1,7 @@
 package com.example.daniel.dota2guessthesound;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 
@@ -9,6 +10,7 @@ import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 
@@ -17,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 
 import com.google.android.gms.ads.AdListener;
@@ -39,7 +41,7 @@ public class StartQuizActivity extends ToastActivity {
     int highScore = 0;
     int coinChance;
 
-    MediaPlayer  mediaPlayer;
+    MediaPlayer mediaPlayer;
 
     TextView scoreTextView;
     TextView resultTextView;
@@ -101,10 +103,9 @@ public class StartQuizActivity extends ToastActivity {
             "stifling dagger","sun ray","supernova", "surge","telekinesis","teleportation",
             "thunder clap","thundergod's wrath", "timber chain","time lock","time walk",
             "torrent","unstable concoction","vacuum","venomous gale", "viper strike",
-            "walrus punch","whirling death","wild axes","winter's curse","wrath of nature",
+            "walrus punch", "whirling death", "wild axes", "winter's curse", "wrath of nature",
             "x marks the spot"));
     ArrayList<String> alreadyUsedSounds = new ArrayList<String>();
-
 
 
     @Override
@@ -112,22 +113,21 @@ public class StartQuizActivity extends ToastActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_quiz);
 
-        button0 = (Button)findViewById(R.id.button0);
-        button1 = (Button)findViewById(R.id.button1);
-        button2 = (Button)findViewById(R.id.button2);
-        button3 = (Button)findViewById(R.id.button3);
-        image = (ImageView)findViewById(R.id.imageView);
-        scoreTextView = (TextView)findViewById(R.id.scoreTextView);
-        resultTextView = (TextView)findViewById(R.id.invokerResultTextView);
-        playAgainButton = (Button)findViewById(R.id.playAgainButton);
-        highScoreTextView = (TextView)findViewById(R.id.highScoreTextView);
+        button0 = (Button) findViewById(R.id.button0);
+        button1 = (Button) findViewById(R.id.button1);
+        button2 = (Button) findViewById(R.id.button2);
+        button3 = (Button) findViewById(R.id.button3);
+        image = (ImageView) findViewById(R.id.imageView);
+        scoreTextView = (TextView) findViewById(R.id.scoreTextView);
+        resultTextView = (TextView) findViewById(R.id.invokerResultTextView);
+        playAgainButton = (Button) findViewById(R.id.playAgainButton);
+        highScoreTextView = (TextView) findViewById(R.id.highScoreTextView);
 
-        playAgainLayout = (RelativeLayout)findViewById(R.id.playAgainLayout);
-        soundAndScoreLayout= (RelativeLayout)findViewById(R.id.relativeLayout1);
-        buttonsLayout = (LinearLayout)findViewById(R.id.linearLayout1);
+        playAgainLayout = (RelativeLayout) findViewById(R.id.playAgainLayout);
+        soundAndScoreLayout = (RelativeLayout) findViewById(R.id.relativeLayout1);
+        buttonsLayout = (LinearLayout) findViewById(R.id.linearLayout1);
 
         settings = this.getSharedPreferences("com.example.daniel.dota2guessthesound", Context.MODE_PRIVATE);
-
 
 
         mInterstitialAd = new InterstitialAd(getApplicationContext());
@@ -138,7 +138,7 @@ public class StartQuizActivity extends ToastActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Typeface buttonFont = Typeface.createFromAsset(getAssets(), "fonts/font.ttf");
-        Typeface scoreFont = Typeface.createFromAsset(getAssets(),"fonts/score_font.ttf" );
+        Typeface scoreFont = Typeface.createFromAsset(getAssets(), "fonts/score_font.ttf");
         scoreTextView.setTypeface(scoreFont);
 
         button0.setTypeface(buttonFont);
@@ -150,21 +150,18 @@ public class StartQuizActivity extends ToastActivity {
         highScoreTextView.setTypeface(scoreFont);
 
 
-
         playAgain(findViewById(R.id.playAgainLayout));
-
-
 
 
     }
 
-    public  void playSound(View view){
+    public void playSound(View view) {
 
         mediaPlayer = MediaPlayer.create(this, sounds.get(chosenSound));
         mediaPlayer.start();
         image.setClickable(false);
-       handler = new Handler();
-       handler.postDelayed(new Runnable() {
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 mediaPlayer.release();
@@ -174,36 +171,35 @@ public class StartQuizActivity extends ToastActivity {
         }, mediaPlayer.getDuration() + 10);
     }
 
-    public void generateQuestion(){
+    public void generateQuestion() {
 
         Random random = new Random();
         chosenSound = random.nextInt(sounds.size());
 
         if (alreadyUsedSounds.size() == names.size()) {
 
-            //ovde se desi nesto kad se svi zvukovi potrose.
 
-            Toast.makeText(getApplicationContext(), "You used all the sounds!!!", Toast.LENGTH_SHORT).show();
-            return;
-        } else{
+            showNoMoreQuestionsDialog();
 
-            while(alreadyUsedSounds.contains(names.get(chosenSound))) {
+        } else {
+
+            while (alreadyUsedSounds.contains(names.get(chosenSound))) {
                 chosenSound = random.nextInt(sounds.size());
             }
-        }
+
         locationOfCorrectAnswer = random.nextInt(4);
         int incorrectAnswerLocation;
 
-        for (int i = 0; i <4 ; i++) {
-            if(i == locationOfCorrectAnswer){
+        for (int i = 0; i < 4; i++) {
+            if (i == locationOfCorrectAnswer) {
 
                 answers[i] = names.get(chosenSound);
 
-            } else{
+            } else {
 
                 incorrectAnswerLocation = random.nextInt(sounds.size());
 
-                while (incorrectAnswerLocation == chosenSound || Arrays.asList(answers).contains(names.get(incorrectAnswerLocation))){
+                while (incorrectAnswerLocation == chosenSound || Arrays.asList(answers).contains(names.get(incorrectAnswerLocation))) {
                     incorrectAnswerLocation = random.nextInt(sounds.size());
                 }
 
@@ -217,6 +213,7 @@ public class StartQuizActivity extends ToastActivity {
         button3.setText(answers[3]);
     }
 
+}
     public void chooseSound(View view) throws InterruptedException {
 
         Random random = new Random();
@@ -311,5 +308,29 @@ public class StartQuizActivity extends ToastActivity {
     protected void onStop() {
         super.onStop();
         finish();
+    }
+
+    private  void showNoMoreQuestionsDialog(){
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Congratulations!");
+        alertDialogBuilder.setMessage("You have answered all the sounds!\nSoon we will add more sounds and new modes!\nStay tuned!");
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                playAgain(findViewById(R.id.playAgainButton));
+            }
+        });
+
+        alertDialogBuilder.setNeutralButton("Back to Menu", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                backToMenu(findViewById(R.id.goBackImageView));
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }
