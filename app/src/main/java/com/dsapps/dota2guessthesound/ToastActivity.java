@@ -102,7 +102,7 @@ public class ToastActivity extends AppCompatActivity {
         } else{
 
 
-            Log.i("TAG ADD", "Add not loaded yet.");
+            Toast.makeText(this, "Add not loaded yet", Toast.LENGTH_SHORT).show();
         }
 
         mInterstitialAd.setAdListener(new AdListener(){
@@ -116,8 +116,9 @@ public class ToastActivity extends AppCompatActivity {
         });
     }
 
-    public void setHighScore(int score, int highScore, SharedPreferences settings, TextView highScoreTextView, String highscoreMode){
+    public void setHighScore(int score, SharedPreferences settings, TextView highScoreTextView, String highscoreMode, String seconds){
 
+      int  highScore = Integer.parseInt(settings.getString(highscoreMode, Integer.toString(0)));
         if(score > highScore){
             highScore = score;
 
@@ -128,7 +129,7 @@ public class ToastActivity extends AppCompatActivity {
 
         String oldHighScore = settings.getString(highscoreMode, Integer.toString(0));
 
-        highScoreTextView.setText("Highscore: " + oldHighScore);
+        highScoreTextView.setText(seconds +" Highscore: " + oldHighScore);
 
 
     }

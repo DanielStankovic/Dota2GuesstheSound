@@ -11,7 +11,7 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
+
 import android.view.View;
 
 import android.widget.Button;
@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 import com.google.android.gms.ads.AdListener;
@@ -38,7 +38,6 @@ public class StartQuizActivity extends ToastActivity {
 
     int chosenSound;
     int score = 0;
-    int highScore = 0;
     int coinChance;
 
     MediaPlayer mediaPlayer;
@@ -128,6 +127,8 @@ public class StartQuizActivity extends ToastActivity {
         buttonsLayout = (LinearLayout) findViewById(R.id.linearLayout1);
 
         settings = this.getSharedPreferences("com.example.daniel.dota2guessthesound", Context.MODE_PRIVATE);
+
+
 
 
         mInterstitialAd = new InterstitialAd(getApplicationContext());
@@ -234,7 +235,7 @@ public class StartQuizActivity extends ToastActivity {
 
         } else{
 
-            showInterstitialAd();
+            showInterstitialAd(mInterstitialAd);
 
             showCheckAnswerToast("WRONG!", Color.RED, -50 );
             showGameOverScreen();
@@ -277,28 +278,11 @@ public class StartQuizActivity extends ToastActivity {
         playAgainLayout.setVisibility(View.VISIBLE);
         resultTextView.setText("Your score is: " + score);
 
-        setHighScore(score, highScore, settings, highScoreTextView, "startQuizHighScore");
+        setHighScore(score, settings, highScoreTextView, "startQuizHighScore", "");
 
     }
 
-    public void showInterstitialAd (){
 
-        if(mInterstitialAd.isLoaded()){
-            mInterstitialAd.show();
-        } else{
-
-
-            Log.i("TAG ADD", "Add not loaded yet.");
-        }
-
-        mInterstitialAd.setAdListener(new AdListener(){
-
-            @Override
-            public void onAdClosed() {
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-        });
-    }
 
     public void backToMenu(View view){
         StartQuizActivity.this.finish();

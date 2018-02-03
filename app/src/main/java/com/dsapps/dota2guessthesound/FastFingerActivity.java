@@ -41,6 +41,7 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
     DialogFragment newFragment;
 
     int score = 0;
+
     int numberOfQuestionsTextView = 0;
 
     long timer;
@@ -155,7 +156,14 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
     protected void onStop() {
         super.onStop();
         countDownTimer.cancel();
+        mediaPlayer.release();
         finish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
     }
 
 
@@ -280,12 +288,15 @@ public class FastFingerActivity extends ToastActivity implements SimpleDialogFra
                 if(timer == 30200){
                     showCoinRewardToast(R.drawable.five_coin);
                     setCoinValue(settings, 5);
+                    setHighScore(score, settings, highScoreTextView, "30secondsFastFinger", "30sec");
                 }else if(timer == 60200){
                     showCoinRewardToast(R.drawable.ten_coin);
                     setCoinValue(settings, 10);
+                    setHighScore(score, settings, highScoreTextView, "60secondsFastFinger", "60sec");
                 }else if(timer == 90200){
                     showCoinRewardToast(R.drawable.fifteen_coin);
                     setCoinValue(settings, 15);
+                    setHighScore(score, settings, highScoreTextView, "90secondsFastFinger","90sec");
                 }
                 showGameOverScreen();
                 alreadyUsedSounds.clear();

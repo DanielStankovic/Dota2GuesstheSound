@@ -516,7 +516,8 @@ private void initiateCountDownHeartTimer(){
         gameOverContainer.setVisibility(View.VISIBLE);
         resultTextView.setText("You survived for " + timePassed + " seconds");
 
-        setHighScore(timePassed, highScore, settings, highScoreTextView, "invokerModeHighScore");
+
+        setHighScore(timePassed, settings, highScoreTextView, "invokerModeHighScore", "");
 
     }
 
