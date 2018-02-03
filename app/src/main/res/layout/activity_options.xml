@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.daniel.dota2guessthesound.OptionsActivity"
+    tools:context="com.dsapps.dota2guessthesound.OptionsActivity"
     android:background="@drawable/background">
 
     <TextView

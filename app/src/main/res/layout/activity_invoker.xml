@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/invoker_background"
     android:orientation="vertical"
-    tools:context="com.example.daniel.dota2guessthesound.InvokerActivity">
+    tools:context="com.dsapps.dota2guessthesound.InvokerActivity">
 
     <RelativeLayout
         android:id="@+id/gameOverContainer"

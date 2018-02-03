@@ -7,7 +7,7 @@
     android:background="@drawable/background"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.example.daniel.dota2guessthesound.MainActivity">
+    tools:context="com.dsapps.dota2guessthesound.MainActivity">
 
 
     <RelativeLayout

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.daniel.dota2guessthesound">
+    package="com.dsapps.dota2guessthesound">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.dsapps.dota2guessthesound.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,15 +17,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StartQuizActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.dsapps.dota2guessthesound.StartQuizActivity"
+            android:parentActivityName="com.dsapps.dota2guessthesound.MainActivity"
             android:theme="@style/playGameTheme" />
-        <activity android:name=".ToastActivity" />
-        <activity android:name=".OptionsActivity" />
+        <activity android:name="com.dsapps.dota2guessthesound.ToastActivity" />
+        <activity android:name="com.dsapps.dota2guessthesound.OptionsActivity" />
         <activity
-            android:name=".FastFingerActivity"
+            android:name="com.dsapps.dota2guessthesound.FastFingerActivity"
             android:theme="@style/playGameTheme" />
-        <activity android:name=".InvokerActivity"
+        <activity android:name="com.dsapps.dota2guessthesound.InvokerActivity"
             android:theme="@style/playGameTheme"/>
     </application>
 

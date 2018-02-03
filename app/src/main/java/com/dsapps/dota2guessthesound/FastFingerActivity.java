@@ -1,19 +1,21 @@
-package com.example.daniel.dota2guessthesound;
+package com.dsapps.dota2guessthesound;
+
+
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
-import android.os.Handler;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
-import android.view.View;
+import android.os.CountDownTimer;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 
+import android.support.v7.app.AlertDialog;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,7 +24,6 @@ import android.widget.TextView;
 
 
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
@@ -30,22 +31,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+public class FastFingerActivity extends ToastActivity implements SimpleDialogFragment.NoticeDialogListener {
 
+    TextView timerTextView;
+    TextView scoreTextView;
+    TextView highScoreTextView;
+    TextView resultTextView;
 
+    DialogFragment newFragment;
 
+    int score = 0;
+    int numberOfQuestionsTextView = 0;
 
-public class StartQuizActivity extends ToastActivity {
+    long timer;
 
     int chosenSound;
-    int score = 0;
-    int highScore = 0;
-    int coinChance;
+
+    long coinChance;
 
     MediaPlayer mediaPlayer;
-
-    TextView scoreTextView;
-    TextView resultTextView;
-    TextView highScoreTextView;
 
     int locationOfCorrectAnswer = 0;
     String[] answers = new String[4];
@@ -62,12 +66,11 @@ public class StartQuizActivity extends ToastActivity {
     RelativeLayout soundAndScoreLayout;
     LinearLayout buttonsLayout;
 
-    SharedPreferences settings;
-
     InterstitialAd mInterstitialAd;
 
+    CountDownTimer countDownTimer;
+    SharedPreferences settings;
 
-    Handler handler;
 
     ArrayList<Integer> sounds = new ArrayList<Integer>(Arrays.<Integer>asList(R.raw.astral_spirit, R.raw.charge_of_darkness,
             R.raw.counter_helix, R.raw.curse_of_the_silent, R.raw.dark_pact, R.raw.death_ward, R.raw.dismember,
@@ -103,72 +106,65 @@ public class StartQuizActivity extends ToastActivity {
             "stifling dagger","sun ray","supernova", "surge","telekinesis","teleportation",
             "thunder clap","thundergod's wrath", "timber chain","time lock","time walk",
             "torrent","unstable concoction","vacuum","venomous gale", "viper strike",
-            "walrus punch", "whirling death", "wild axes", "winter's curse", "wrath of nature",
+            "walrus punch","whirling death","wild axes","winter's curse","wrath of nature",
             "x marks the spot"));
     ArrayList<String> alreadyUsedSounds = new ArrayList<String>();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start_quiz);
+        setContentView(R.layout.activity_fast_finger);
 
-        button0 = (Button) findViewById(R.id.button0);
-        button1 = (Button) findViewById(R.id.button1);
-        button2 = (Button) findViewById(R.id.button2);
-        button3 = (Button) findViewById(R.id.button3);
-        image = (ImageView) findViewById(R.id.imageView);
-        scoreTextView = (TextView) findViewById(R.id.scoreTextView);
-        resultTextView = (TextView) findViewById(R.id.invokerResultTextView);
-        playAgainButton = (Button) findViewById(R.id.playAgainButton);
-        highScoreTextView = (TextView) findViewById(R.id.highScoreTextView);
+        timerTextView = (TextView)findViewById(R.id.timerTextView);
+        scoreTextView = (TextView)findViewById(R.id.scoreTextView);
+        resultTextView = (TextView)findViewById(R.id.invokerResultTextView);
 
-        playAgainLayout = (RelativeLayout) findViewById(R.id.playAgainLayout);
-        soundAndScoreLayout = (RelativeLayout) findViewById(R.id.relativeLayout1);
-        buttonsLayout = (LinearLayout) findViewById(R.id.linearLayout1);
+        button0 = (Button)findViewById(R.id.button0);
+        button1 = (Button)findViewById(R.id.button1);
+        button2 = (Button)findViewById(R.id.button2);
+        button3 = (Button)findViewById(R.id.button3);
+        image = (ImageView)findViewById(R.id.imageView);
 
+        playAgainButton = (Button)findViewById(R.id.playAgainButton);
+        highScoreTextView = (TextView)findViewById(R.id.highScoreTextView);
+
+        playAgainLayout = (RelativeLayout)findViewById(R.id.playAgainLayout);
+        soundAndScoreLayout= (RelativeLayout)findViewById(R.id.relativeLayout1);
+        buttonsLayout = (LinearLayout)findViewById(R.id.linearLayout1);
         settings = this.getSharedPreferences("com.example.daniel.dota2guessthesound", Context.MODE_PRIVATE);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        setFonts();
 
         mInterstitialAd = new InterstitialAd(getApplicationContext());
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
-
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        Typeface buttonFont = Typeface.createFromAsset(getAssets(), "fonts/font.ttf");
-        Typeface scoreFont = Typeface.createFromAsset(getAssets(), "fonts/score_font.ttf");
-        scoreTextView.setTypeface(scoreFont);
-
-        button0.setTypeface(buttonFont);
-        button1.setTypeface(buttonFont);
-        button2.setTypeface(buttonFont);
-        button3.setTypeface(buttonFont);
-        playAgainButton.setTypeface(scoreFont);
-        resultTextView.setTypeface(scoreFont);
-        highScoreTextView.setTypeface(scoreFont);
-
-
-        playAgain(findViewById(R.id.playAgainLayout));
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        newFragment = new SimpleDialogFragment();
+        newFragment.setCancelable(false);
+        newFragment.show(ft, "tag");
 
 
     }
 
-    public void playSound(View view) {
+    @Override
+    protected void onStop() {
+        super.onStop();
+        countDownTimer.cancel();
+        finish();
+    }
 
-        mediaPlayer = MediaPlayer.create(this, sounds.get(chosenSound));
-        mediaPlayer.start();
-        image.setClickable(false);
-        handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mediaPlayer.release();
-                image.setClickable(true);
 
-            }
-        }, mediaPlayer.getDuration() + 10);
+
+    public  void playSound(View view){
+
+        if(!mediaPlayer.isPlaying()){
+            mediaPlayer.start();
+        }
     }
 
     public void generateQuestion() {
@@ -178,8 +174,9 @@ public class StartQuizActivity extends ToastActivity {
 
         if (alreadyUsedSounds.size() == names.size()) {
 
-
             showNoMoreQuestionsDialog();
+
+
 
         } else {
 
@@ -187,73 +184,73 @@ public class StartQuizActivity extends ToastActivity {
                 chosenSound = random.nextInt(sounds.size());
             }
 
-        locationOfCorrectAnswer = random.nextInt(4);
-        int incorrectAnswerLocation;
+            locationOfCorrectAnswer = random.nextInt(4);
+            int incorrectAnswerLocation;
 
-        for (int i = 0; i < 4; i++) {
-            if (i == locationOfCorrectAnswer) {
+            for (int i = 0; i < 4; i++) {
+                if (i == locationOfCorrectAnswer) {
 
-                answers[i] = names.get(chosenSound);
+                    answers[i] = names.get(chosenSound);
 
-            } else {
+                } else {
 
-                incorrectAnswerLocation = random.nextInt(sounds.size());
-
-                while (incorrectAnswerLocation == chosenSound || Arrays.asList(answers).contains(names.get(incorrectAnswerLocation))) {
                     incorrectAnswerLocation = random.nextInt(sounds.size());
+
+                    while (incorrectAnswerLocation == chosenSound || Arrays.asList(answers).contains(names.get(incorrectAnswerLocation))) {
+                        incorrectAnswerLocation = random.nextInt(sounds.size());
+                    }
+
+
+                    answers[i] = names.get(incorrectAnswerLocation);
                 }
-
-
-                answers[i] = names.get(incorrectAnswerLocation);
             }
+            button0.setText(answers[0]);
+            button1.setText(answers[1]);
+            button2.setText(answers[2]);
+            button3.setText(answers[3]);
+            mediaPlayer = MediaPlayer.create(this, sounds.get(chosenSound));
+            mediaPlayer.start();
+
         }
-        button0.setText(answers[0]);
-        button1.setText(answers[1]);
-        button2.setText(answers[2]);
-        button3.setText(answers[3]);
     }
 
-}
     public void chooseSound(View view) throws InterruptedException {
-
         Random random = new Random();
         coinChance = random.nextInt(100);
+
         if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))){
 
             showCheckAnswerToast("CORRECT!", Color.GREEN, -50 );
-            if(coinChance <= 15) {
-                showCoinRewardToast(R.drawable.two_coin);
-                setCoinValue(settings, 2);
-
+            if(coinChance <= 10){
+                showCoinRewardToast(R.drawable.one_coin);
+                setCoinValue(settings, 1);
             }
             alreadyUsedSounds.add(names.get(chosenSound));
             score++;
-            generateQuestion();
-            scoreTextView.setText("Score: " + Integer.toString(score));
+
+
 
 
         } else{
-
-            showInterstitialAd();
-
             showCheckAnswerToast("WRONG!", Color.RED, -50 );
-            showGameOverScreen();
+
 
         }
 
-
+        numberOfQuestionsTextView++;
         try {
-            if (mediaPlayer.isPlaying()) {
+
                 mediaPlayer.stop();
                 mediaPlayer.release();
-                handler.removeCallbacksAndMessages(null);
 
-            }
-            image.setClickable(true);
+
+
         } catch (Exception e){
 
 
         }
+        scoreTextView.setText("Score: " + Integer.toString(score) + "/" + Integer.toString(numberOfQuestionsTextView));
+        generateQuestion();
 
     }
 
@@ -262,52 +259,80 @@ public class StartQuizActivity extends ToastActivity {
         buttonsLayout.setVisibility(View.VISIBLE);
         playAgainLayout.setVisibility(View.GONE);
         score = 0;
-        scoreTextView.setText("Score: " + Integer.toString(score));
+        numberOfQuestionsTextView = 0;
+        scoreTextView.setText("Score: " + Integer.toString(score) + "/" + Integer.toString(numberOfQuestionsTextView));
         alreadyUsedSounds.clear();
         generateQuestion();
+       countDownTimer = new CountDownTimer(timer, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
 
+                timerTextView.setText(String.valueOf(millisUntilFinished / 1000) + "s");
+            }
+
+            @Override
+            public void onFinish() {
+
+                timerTextView.setText("0s");
+                mediaPlayer.release();
+                showInterstitialAd(mInterstitialAd);
+
+                if(timer == 30200){
+                    showCoinRewardToast(R.drawable.five_coin);
+                    setCoinValue(settings, 5);
+                }else if(timer == 60200){
+                    showCoinRewardToast(R.drawable.ten_coin);
+                    setCoinValue(settings, 10);
+                }else if(timer == 90200){
+                    showCoinRewardToast(R.drawable.fifteen_coin);
+                    setCoinValue(settings, 15);
+                }
+                showGameOverScreen();
+                alreadyUsedSounds.clear();
+
+            }
+        }.start();
 
     }
 
     public void showGameOverScreen(){
 
-
         soundAndScoreLayout.setVisibility(View.GONE);
         buttonsLayout.setVisibility(View.GONE);
         playAgainLayout.setVisibility(View.VISIBLE);
-        resultTextView.setText("Your score is: " + score);
+        resultTextView.setText("Your score is: " + score + "/" + numberOfQuestionsTextView);
 
-        setHighScore(score, highScore, settings, highScoreTextView, "startQuizHighScore");
 
     }
 
-    public void showInterstitialAd (){
+public void setFonts(){
 
-        if(mInterstitialAd.isLoaded()){
-            mInterstitialAd.show();
-        } else{
+    Typeface buttonFont = Typeface.createFromAsset(getAssets(), "fonts/font.ttf");
+    Typeface scoreFont = Typeface.createFromAsset(getAssets(),"fonts/score_font.ttf" );
+    scoreTextView.setTypeface(scoreFont);
+
+    button0.setTypeface(buttonFont);
+    button1.setTypeface(buttonFont);
+    button2.setTypeface(buttonFont);
+    button3.setTypeface(buttonFont);
+    playAgainButton.setTypeface(scoreFont);
+    scoreTextView.setTypeface(scoreFont);
+    timerTextView.setTypeface(scoreFont);
+    resultTextView.setTypeface(scoreFont);
+    highScoreTextView.setTypeface(scoreFont);
+
+}
 
 
-            Log.i("TAG ADD", "Add not loaded yet.");
-        }
-
-        mInterstitialAd.setAdListener(new AdListener(){
-
-            @Override
-            public void onAdClosed() {
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-        });
+    @Override
+    public void onGoButtonClick(long time) {
+        timer = time;
+        playAgain(findViewById(R.id.playAgainLayout));
+        newFragment.dismiss();
     }
 
     public void backToMenu(View view){
-        StartQuizActivity.this.finish();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        finish();
+        FastFingerActivity.this.finish();
     }
 
     private  void showNoMoreQuestionsDialog(){
@@ -333,4 +358,5 @@ public class StartQuizActivity extends ToastActivity {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
 }

@@ -7,7 +7,7 @@
     android:background="@drawable/background"
     android:gravity="bottom"
     android:orientation="vertical"
-    tools:context="com.example.daniel.dota2guessthesound.FastFingerActivity">
+    tools:context="com.dsapps.dota2guessthesound.FastFingerActivity">
 
     <RelativeLayout
         android:id="@+id/playAgainLayout"

@@ -1,4 +1,4 @@
-package com.example.daniel.dota2guessthesound;
+package com.dsapps.dota2guessthesound;
 
 import android.app.Dialog;
 import android.content.Context;
