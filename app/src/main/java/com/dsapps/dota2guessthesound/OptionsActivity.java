@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.media.AudioManager;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -33,6 +34,11 @@ public class OptionsActivity extends ToastActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("Options");
+        }
         volumeText  = (TextView)findViewById(R.id.volumeText);
         settings = this.getSharedPreferences("com.example.daniel.dota2guessthesound", Context.MODE_PRIVATE);
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);

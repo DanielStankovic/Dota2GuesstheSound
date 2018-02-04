@@ -34,7 +34,7 @@ public class ToastActivity extends AppCompatActivity {
         layout.setBackgroundColor(ContextCompat.getColor(this, R.color.lightGrayToast));
 
         TextView textView = (TextView)layout.findViewById(R.id.toast_message);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textView.setText(message);
 

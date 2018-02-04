@@ -14,6 +14,8 @@
     <color name="correctAnswer">#FF55FF00</color>
     <color name="wrongAnswer">#fc0717</color>
 
+    <color name="infoToastTitleColor">#ffffff</color>
+
     <color name="answersBackgroundColor">#00aaaaaa</color>
 
 </resources>

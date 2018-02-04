@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.dsapps.dota2guessthesound.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,16 +17,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.dsapps.dota2guessthesound.StartQuizActivity"
-            android:parentActivityName="com.dsapps.dota2guessthesound.MainActivity"
+            android:name=".StartQuizActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/playGameTheme" />
-        <activity android:name="com.dsapps.dota2guessthesound.ToastActivity" />
-        <activity android:name="com.dsapps.dota2guessthesound.OptionsActivity" />
+        <activity android:name=".ToastActivity" />
+        <activity android:name=".OptionsActivity"
+            android:parentActivityName=".MainActivity"/>
         <activity
-            android:name="com.dsapps.dota2guessthesound.FastFingerActivity"
+            android:name=".FastFingerActivity"
             android:theme="@style/playGameTheme" />
-        <activity android:name="com.dsapps.dota2guessthesound.InvokerActivity"
-            android:theme="@style/playGameTheme"/>
+        <activity
+            android:name=".InvokerActivity"
+            android:theme="@style/playGameTheme" />
+        <activity
+            android:name=".AboutActivity"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">Dota 2 - Spell Sound Quiz</string>
+    <string name="app_name">Spell Sound Quiz for Dota 2</string>
+
+    <string name="welcome_text">Welcome to Spell Sound Quiz for Dota 2. As Dota 2 fans, we all know that forward thinking,
+        strategic planning and quick reactions are the most important skills in the game. However, having a good ear for spell
+        sounds can sometimes save your or teammate\'s life. This quiz is designed to help you hone you listening abilities and in
+        that way improve your gameplay. Currently, we have 3 available modes: Quiz Mode, Fast Finger Mode, and Invoker Mode.
+    </string>
+
+    <string name="legal_disclaimer">THIS APP IS NOT CREATED, SPONSORED OR ENDORSED BY VALVE CORPORATION. This app does not
+        reflect the views or opinions of Valve Corporation or anyone officially involved in producing or managing Dota 2.
+        Dota 2 is a registered trademark of Valve Corporation. All of the in-game imagery, hero icons, hero names, sounds, spell names,
+        launcher icon and Dota name are copyright and/or registered trademarks of their respective owners. Usage for this app falls under
+        fair use guidelines.
+    </string>
+
+    <string name="credits">This app is developed by DS-Apps. Big thanks to <b>Željko Stanković</b> for helping with the content gathering.
+    Some game assets are <b>Designed by Freepik</b> designers, huge gratitude to them.</string>
+
+    <string name="changelog_version_title">Changelog \u0026 Version</string>
+    <string name="changelog_version">Version 1.0 \n </string>
 </resources>

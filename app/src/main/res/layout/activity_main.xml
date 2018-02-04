@@ -29,7 +29,8 @@
             android:onClick="showCoinToast"
             android:scaleX="0.7"
             android:scaleY="0.7"
-            app:srcCompat="@drawable/coin_blank" />
+            app:srcCompat="@drawable/coin_blank"
+            tools:ignore="RtlHardcoded" />
 
         <TextView
             android:id="@+id/coinTextView"
@@ -43,7 +44,8 @@
             android:layout_toStartOf="@id/imageView6"
             android:text="0"
             android:textColor="@color/toastText"
-            android:textSize="26sp" />
+            android:textSize="26sp"
+            tools:ignore="RtlHardcoded" />
 
         <ImageView
             android:id="@+id/leftArrow"
@@ -55,7 +57,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             app:srcCompat="@drawable/left_arrow"
-            android:onClick="goLeft"/>
+            android:onClick="goLeft"
+            tools:ignore="RtlHardcoded" />
 
         <ImageView
             android:id="@+id/rightArrow"
@@ -86,7 +89,8 @@
             android:text="Start Quiz"
             android:textColor="#ff4d00"
             android:textSize="30sp"
-            android:visibility="visible" />
+            android:visibility="visible"
+            tools:ignore="RtlHardcoded" />
 
         <TextView
             android:id="@+id/fastFingerTextView"
@@ -105,26 +109,8 @@
             android:text="Fast Finger Mode"
             android:textColor="#ff4d00"
             android:textSize="30sp"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/optionsTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_toEndOf="@id/leftArrow"
-            android:layout_toLeftOf="@+id/rightArrow"
-            android:layout_toRightOf="@id/leftArrow"
-            android:layout_toStartOf="@id/rightArrow"
-            android:gravity="center"
-            android:onClick="optionsActivity"
-            android:text="Options"
-            android:textColor="#ff4d00"
-            android:textSize="30sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:ignore="RtlHardcoded" />
 
         <TextView
             android:id="@+id/invokerTextView"
@@ -143,7 +129,39 @@
             android:text="Invoker Mode"
             android:textColor="#ff4d00"
             android:textSize="30sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:ignore="RtlHardcoded" />
+
+        <ImageView
+            android:id="@+id/achievementImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="30dp"
+            app:srcCompat="@drawable/achievement_icon" />
+
+        <ImageView
+            android:id="@+id/optionsImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            app:srcCompat="@drawable/options_icon"
+            android:onClick="optionsActivity"/>
+
+        <ImageView
+            android:id="@+id/aboutImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
+            app:srcCompat="@drawable/about_icon"
+            android:onClick="aboutActivity"/>
 
     </RelativeLayout>
 
@@ -151,16 +169,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:gravity="center"
+        android:gravity="bottom|center_horizontal"
         android:orientation="horizontal">
 
         <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="40dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="20dp"
             ads:adSize="BANNER"
             ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 

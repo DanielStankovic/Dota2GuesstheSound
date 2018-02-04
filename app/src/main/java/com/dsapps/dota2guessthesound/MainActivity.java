@@ -32,7 +32,7 @@ import com.google.android.gms.ads.MobileAds;
 public class MainActivity extends ToastActivity {
 
     TextView startQuizTextView;
-    TextView optionsTextView;
+
     TextView fastFingersTextView;
     TextView invokerTextView;
     TextView coinTextView;
@@ -54,7 +54,6 @@ public class MainActivity extends ToastActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startQuizTextView = (TextView)findViewById(R.id.playGameTextView);
-        optionsTextView = (TextView)findViewById(R.id.optionsTextView);
         fastFingersTextView = (TextView)findViewById(R.id.fastFingerTextView);
         invokerTextView = (TextView)findViewById(R.id.invokerTextView);
         coinTextView = (TextView)findViewById(R.id.coinTextView);
@@ -67,7 +66,6 @@ public class MainActivity extends ToastActivity {
         Typeface font = Typeface.createFromAsset(getAssets(),"fonts/score_font.ttf" );
 
         startQuizTextView.setTypeface(font);
-        optionsTextView.setTypeface(font);
         fastFingersTextView.setTypeface(font);
         invokerTextView.setTypeface(font);
         coinTextView.setTypeface(font);
@@ -104,9 +102,9 @@ public class MainActivity extends ToastActivity {
 
             case R.id.actionbar_icon :
 
-              int spannableColor = ContextCompat.getColor(this, R.color.textMenuInfo);
+              int spannableColor = ContextCompat.getColor(this, R.color.infoToastTitleColor);
 
-              String infoText = "DOTA 2 SOUND QUIZ\nDeveloper: Daniel Stanković\nContent Assistant: Željko Stanković\nSerbia 2017";
+              String infoText = "SPELL SOUND QUIZ FOR DOTA 2\nDeveloper: DS-Apps\nSerbia 2018";
                Spannable spannable = new SpannableString(infoText);
 
                 spannable.setSpan(new ForegroundColorSpan(spannableColor), 0, infoText.indexOf("\n"), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -145,14 +143,20 @@ public class MainActivity extends ToastActivity {
         startActivity(optionsIntent);
     }
 
+    public void aboutActivity(View view){
+
+        Intent aboutIntent = new Intent(this, AboutActivity.class);
+        startActivity(aboutIntent);
+    }
+
 
 
     public void goLeft(View view){
 
 
-        if(visibleView.equals("startQuiz")){
 
-        } else if(visibleView.equals("fastFinger")){
+
+        if(visibleView.equals("fastFinger")){
 
             visibleView = "startQuiz";
         animateToRight(fastFingersTextView, startQuizTextView);
@@ -167,12 +171,7 @@ public class MainActivity extends ToastActivity {
             fastFingersTextView.setVisibility(View.VISIBLE);
 
         }
-        else if(visibleView.equals("options")){
-            visibleView = "invokerMode";
-            animateToRight(optionsTextView, invokerTextView);
-            optionsTextView.setVisibility(View.GONE);
-            invokerTextView.setVisibility(View.VISIBLE);
-        }
+
 
     }
 
@@ -188,16 +187,6 @@ public class MainActivity extends ToastActivity {
             animateToLeft(fastFingersTextView, invokerTextView);
             fastFingersTextView.setVisibility(View.GONE);
             invokerTextView.setVisibility(View.VISIBLE);
-
-        }
-        else if(visibleView.equals("invokerMode")){
-            visibleView = "options";
-            animateToLeft(invokerTextView, optionsTextView);
-            invokerTextView.setVisibility(View.GONE);
-            optionsTextView.setVisibility(View.VISIBLE);
-        }
-
-        else if(visibleView.equals("options")){
 
         }
 
