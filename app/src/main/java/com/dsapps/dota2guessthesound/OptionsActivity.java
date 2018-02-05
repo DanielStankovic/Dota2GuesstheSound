@@ -1,6 +1,7 @@
 package com.dsapps.dota2guessthesound;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
@@ -26,6 +27,9 @@ public class OptionsActivity extends ToastActivity {
     SeekBar seekBar = null;
     private AudioManager audioManager = null;
     TextView volumeText;
+    TextView watchVideoText;
+    TextView rateAppText;
+    TextView emailText;
     RewardedVideoAd mRewardedVideoAd;
     SharedPreferences settings;
 
@@ -40,6 +44,9 @@ public class OptionsActivity extends ToastActivity {
             actionBar.setTitle("Options");
         }
         volumeText  = (TextView)findViewById(R.id.volumeText);
+        watchVideoText = (TextView)findViewById(R.id.watch_video_textView);
+        rateAppText = (TextView)findViewById(R.id.rate_app_textView);
+        emailText = (TextView)findViewById(R.id.email_textView);
         settings = this.getSharedPreferences("com.example.daniel.dota2guessthesound", Context.MODE_PRIVATE);
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
@@ -89,9 +96,7 @@ public class OptionsActivity extends ToastActivity {
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 
-        Typeface font = Typeface.createFromAsset(getAssets(),"fonts/score_font.ttf" );
-
-        volumeText.setTypeface(font);
+        setFonts();
         volumeControls();
     }
 
@@ -134,5 +139,23 @@ public class OptionsActivity extends ToastActivity {
             mRewardedVideoAd.show();
         }
 
+    }
+
+    private void setFonts(){
+        Typeface font = Typeface.createFromAsset(getAssets(),"fonts/score_font.ttf" );
+
+        volumeText.setTypeface(font);
+        watchVideoText.setTypeface(font);
+        rateAppText.setTypeface(font);
+        emailText.setTypeface(font);
+
+    }
+
+    public void sendEmail(View view){
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("plain/text");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"dsapps2018@gmail.com"});
+        startActivity(Intent.createChooser(intent, "Select Action"));
     }
 }
