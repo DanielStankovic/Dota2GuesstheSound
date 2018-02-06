@@ -18,4 +18,6 @@
 
     <color name="answersBackgroundColor">#00aaaaaa</color>
 
+    <color name="switchOnColor">#ff4d00</color>
+
 </resources>

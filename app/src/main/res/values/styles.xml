@@ -31,4 +31,9 @@
         <item name="android:layout_marginTop">6dp</item>
     </style>
 
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/switchOnColor</item>
+
+    </style>
+
 </resources>
