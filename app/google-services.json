@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "554740780251",
-    "firebase_url": "https://dota-2-spell-sound-quiz.firebaseio.com",
-    "project_id": "dota-2-spell-sound-quiz",
-    "storage_bucket": "dota-2-spell-sound-quiz.appspot.com"
+    "project_number": "183387896301",
+    "firebase_url": "https://spell-sound-quiz-for-dota-983.firebaseio.com",
+    "project_id": "spell-sound-quiz-for-dota--983",
+    "storage_bucket": "spell-sound-quiz-for-dota--983.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:554740780251:android:34962a67a9040540",
+        "mobilesdk_app_id": "1:183387896301:android:34962a67a9040540",
         "android_client_info": {
           "package_name": "com.dsapps.dota2guessthesound"
         }
       },
       "oauth_client": [
         {
-          "client_id": "554740780251-i0nr78129s8et8oeaavvp32hvgsjtr4o.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.dsapps.dota2guessthesound",
-            "certificate_hash": "d44764f223e02bee595072433a42f006dfbcc9a0"
-          }
-        },
-        {
-          "client_id": "554740780251-4b44d1554tovsdhs7sjrgclag3tk3tvg.apps.googleusercontent.com",
+          "client_id": "183387896301-7q7e1psb6qtrv6qhn5gcphcqr1lt8nbh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCVEOiLVpumfQAd-aSOOpZZYHgODgZNdl0"
+          "current_key": "AIzaSyCL0j4cBQ-H2Bx7biueOooG71Z8ZARevWI"
         }
       ],
       "services": {
@@ -40,7 +32,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "554740780251-4b44d1554tovsdhs7sjrgclag3tk3tvg.apps.googleusercontent.com",
+              "client_id": "183387896301-7q7e1psb6qtrv6qhn5gcphcqr1lt8nbh.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

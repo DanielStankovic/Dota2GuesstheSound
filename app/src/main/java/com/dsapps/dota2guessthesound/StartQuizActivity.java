@@ -25,6 +25,8 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.games.Games;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +36,7 @@ import java.util.Random;
 
 
 
-public class StartQuizActivity extends ToastActivity {
+public class StartQuizActivity extends MainActivity {
 
     int chosenSound;
     int score = 0;
@@ -105,6 +107,7 @@ public class StartQuizActivity extends ToastActivity {
             "walrus punch", "whirling death", "wild axes", "winter's curse", "wrath of nature",
             "x marks the spot"));
     ArrayList<String> alreadyUsedSounds = new ArrayList<String>();
+    ArrayList<String> achievementTotalDifferentSounds = new ArrayList<>();
 
 
     @Override
@@ -128,8 +131,8 @@ public class StartQuizActivity extends ToastActivity {
 
         settings = this.getSharedPreferences("com.example.daniel.dota2guessthesound", Context.MODE_PRIVATE);
 
-
-
+        //OVDE DA SE DOBAVI LISTA ZVUKOVA KOJI SU ISKORISCENI ZA ACHIVMENT PREKO SETTINGS I DA SE DODA
+        // U  achievementTotalDifferentSounds LISTU.
 
         mInterstitialAd = new InterstitialAd(getApplicationContext());
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
@@ -222,12 +225,25 @@ public class StartQuizActivity extends ToastActivity {
         if(view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))){
 
             showCheckAnswerToast("CORRECT!", Color.GREEN, -50 );
-            if(coinChance <= 15) {
+
+             if(coinChance <= 10) {
                 showCoinRewardToast(R.drawable.two_coin);
                 setCoinValue(settings, 2);
 
             }
+
             alreadyUsedSounds.add(names.get(chosenSound));
+
+             //PROVERAVA DA LI TAJ ZVUK VEC POSTOJI U LISTI, AKO NE DODAJE GA
+//             if(!achievementTotalDifferentSounds.contains(names.get(chosenSound))){
+//                 achievementTotalDifferentSounds.add(names.get(chosenSound));
+            // I OVDE TREBA DA SE TA LISTA UPISE U SETTINGS objekat.
+//             }
+
+//            if(achievementTotalDifferentSounds.size() == 10){
+//                OTKLJUCAVA SE ACHIVMENT
+//                ili se pokazuje toast da je achivment otkljucan u zavisnosti dal je log in ili ne
+//            }
             score++;
             generateQuestion();
             scoreTextView.setText("Score: " + Integer.toString(score));
