@@ -1,4 +1,4 @@
-package com.dsapps.dota2guessthesound;
+package com.dsapps2018.dota2guessthesound;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,8 +10,10 @@ import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 
+import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
@@ -22,11 +24,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.AchievementsClient;
 import com.google.android.gms.games.Games;
+import com.google.android.gms.games.GamesClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,6 +60,8 @@ public class StartQuizActivity extends MainActivity {
     int locationOfCorrectAnswer = 0;
     String[] answers = new String[4];
 
+
+
     ImageView image;
 
     Button button0;
@@ -68,7 +79,12 @@ public class StartQuizActivity extends MainActivity {
     InterstitialAd mInterstitialAd;
 
 
+
+    AchievementsClient mAchievementClient;
+
     Handler handler;
+
+    int achievementTotalGuessedSounds;
 
     ArrayList<Integer> sounds = new ArrayList<Integer>(Arrays.<Integer>asList(R.raw.astral_spirit, R.raw.charge_of_darkness,
             R.raw.counter_helix, R.raw.curse_of_the_silent, R.raw.dark_pact, R.raw.death_ward, R.raw.dismember,
@@ -110,6 +126,7 @@ public class StartQuizActivity extends MainActivity {
     ArrayList<String> achievementTotalDifferentSounds = new ArrayList<>();
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,8 +148,17 @@ public class StartQuizActivity extends MainActivity {
 
         settings = this.getSharedPreferences("com.example.daniel.dota2guessthesound", Context.MODE_PRIVATE);
 
+
+
+
+
         //OVDE DA SE DOBAVI LISTA ZVUKOVA KOJI SU ISKORISCENI ZA ACHIVMENT PREKO SETTINGS I DA SE DODA
         // U  achievementTotalDifferentSounds LISTU.
+
+        loadListOfSounds();
+       achievementTotalGuessedSounds = loadAllGuessedSoundNumber();
+
+        getGoogleSignInAccount();
 
         mInterstitialAd = new InterstitialAd(getApplicationContext());
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
@@ -141,24 +167,45 @@ public class StartQuizActivity extends MainActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        Typeface buttonFont = Typeface.createFromAsset(getAssets(), "fonts/font.ttf");
-        Typeface scoreFont = Typeface.createFromAsset(getAssets(), "fonts/score_font.ttf");
-        scoreTextView.setTypeface(scoreFont);
-
-        button0.setTypeface(buttonFont);
-        button1.setTypeface(buttonFont);
-        button2.setTypeface(buttonFont);
-        button3.setTypeface(buttonFont);
-        playAgainButton.setTypeface(scoreFont);
-        resultTextView.setTypeface(scoreFont);
-        highScoreTextView.setTypeface(scoreFont);
+        setFonts();
 
 
         playAgain(findViewById(R.id.playAgainLayout));
 
 
+
     }
 
+    private void getGoogleSignInAccount(){
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this,
+                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build());
+
+        mGoogleSignInClient.silentSignIn().addOnCompleteListener(this, new OnCompleteListener<GoogleSignInAccount>() {
+            @Override
+            public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
+
+                if(task.isSuccessful()){
+                  GoogleSignInAccount  mGoogleSignInAccount = task.getResult();
+                    getAchievementClientAndToast(mGoogleSignInAccount);
+
+                } else{
+
+                    new android.app.AlertDialog.Builder(StartQuizActivity.this)
+                            .setMessage(getString(R.string.start_quiz_sign_in_failed))
+                            .setNeutralButton(android.R.string.ok, null)
+                            .show();
+                }
+
+            }
+        });
+
+    }
+
+    private void getAchievementClientAndToast(GoogleSignInAccount googleSignInAccount){
+        mAchievementClient = Games.getAchievementsClient(StartQuizActivity.this, googleSignInAccount);
+       Games.getGamesClient(this, GoogleSignIn.getLastSignedInAccount(StartQuizActivity.this) ).setViewForPopups(findViewById(R.id.gps_popup));
+
+    }
     public void playSound(View view) {
 
         mediaPlayer = MediaPlayer.create(this, sounds.get(chosenSound));
@@ -234,21 +281,14 @@ public class StartQuizActivity extends MainActivity {
 
             alreadyUsedSounds.add(names.get(chosenSound));
 
-             //PROVERAVA DA LI TAJ ZVUK VEC POSTOJI U LISTI, AKO NE DODAJE GA
-//             if(!achievementTotalDifferentSounds.contains(names.get(chosenSound))){
-//                 achievementTotalDifferentSounds.add(names.get(chosenSound));
-            // I OVDE TREBA DA SE TA LISTA UPISE U SETTINGS objekat.
-//             }
+           checkDifferentSoundsAchievement();
 
-//            if(achievementTotalDifferentSounds.size() == 10){
-//                OTKLJUCAVA SE ACHIVMENT
-//                ili se pokazuje toast da je achivment otkljucan u zavisnosti dal je log in ili ne
-//            }
+           checkAllGuessedSoundAchievement(achievementTotalGuessedSounds, mAchievementClient);
+
+
             score++;
             generateQuestion();
             scoreTextView.setText("Score: " + Integer.toString(score));
-
-
         } else{
 
             showInterstitialAd(mInterstitialAd);
@@ -274,6 +314,12 @@ public class StartQuizActivity extends MainActivity {
 
     }
 
+
+
+
+
+
+
     public void playAgain(View view){
         soundAndScoreLayout.setVisibility(View.VISIBLE);
         buttonsLayout.setVisibility(View.VISIBLE);
@@ -292,6 +338,8 @@ public class StartQuizActivity extends MainActivity {
         soundAndScoreLayout.setVisibility(View.GONE);
         buttonsLayout.setVisibility(View.GONE);
         playAgainLayout.setVisibility(View.VISIBLE);
+        saveListOfSounds();
+        saveAllGuessedSoundNumber(achievementTotalGuessedSounds);
         resultTextView.setText("Your score is: " + score);
 
         setHighScore(score, settings, highScoreTextView, "startQuizHighScore", "");
@@ -333,4 +381,92 @@ public class StartQuizActivity extends MainActivity {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
+    private void saveListOfSounds(){
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for(String s:achievementTotalDifferentSounds){
+            if(!achievementTotalDifferentSounds.isEmpty()){
+            stringBuilder.append(s);
+            stringBuilder.append(",");
+        }
+        }
+        settings.edit().putString(Constants.DIFFERENT_SOUNDS, stringBuilder.toString()).apply();
+
+    }
+
+    private void loadListOfSounds(){
+
+        String differentSounds = settings.getString(Constants.DIFFERENT_SOUNDS, "");
+        String[] arrayOfDifferentSounds = differentSounds.split(",");
+        achievementTotalDifferentSounds.addAll(Arrays.asList(arrayOfDifferentSounds));
+
+    }
+
+
+
+
+
+    private void setFonts(){
+
+        Typeface buttonFont = Typeface.createFromAsset(getAssets(), "fonts/font.ttf");
+        Typeface scoreFont = Typeface.createFromAsset(getAssets(), "fonts/score_font.ttf");
+        scoreTextView.setTypeface(scoreFont);
+
+        button0.setTypeface(buttonFont);
+        button1.setTypeface(buttonFont);
+        button2.setTypeface(buttonFont);
+        button3.setTypeface(buttonFont);
+        playAgainButton.setTypeface(scoreFont);
+        resultTextView.setTypeface(scoreFont);
+        highScoreTextView.setTypeface(scoreFont);
+    }
+
+
+    //OVA METODA PROVERAVA ACHIVMENTE ZA OVAJ MODE, I ONLINE I OFFLINE
+    private void checkDifferentSoundsAchievement(){
+
+        //PROVERAVA DA LI TAJ ZVUK VEC POSTOJI U LISTI, AKO NE DODAJE GA
+        if(!(achievementTotalDifferentSounds.contains(names.get(chosenSound)))){
+            achievementTotalDifferentSounds.add(names.get(chosenSound));
+
+
+        }
+
+        if(isSignedIn()) {
+            if (achievementTotalDifferentSounds.size() == 11) {
+                mAchievementClient.unlock(getString(R.string.achievement_novice_listener));
+            }
+
+            if (achievementTotalDifferentSounds.size() == 26) {
+                mAchievementClient.unlock(getString(R.string.achievement_apprentice_listener));
+            }
+            if (achievementTotalDifferentSounds.size() == 51) {
+                mAchievementClient.unlock(getString(R.string.achievement_journeyman_listener));
+            }
+            if (achievementTotalDifferentSounds.size() == 101) {
+                mAchievementClient.unlock(getString(R.string.achievement_master_listener));
+            }
+
+
+        }
+        else{
+            if (achievementTotalDifferentSounds.size() == 11) {
+                saveBoolForAchievementsAndShowToast(Constants.NOVICE_LISTENER);
+            }
+
+            if (achievementTotalDifferentSounds.size() == 26) {
+                saveBoolForAchievementsAndShowToast(Constants.APPRENTICE_LISTENER);
+            }
+            if (achievementTotalDifferentSounds.size() == 51) {
+                saveBoolForAchievementsAndShowToast(Constants.JOURNEYMAN_LISTENER);
+            }
+            if (achievementTotalDifferentSounds.size() == 101) {
+                saveBoolForAchievementsAndShowToast(Constants.MASTER_LISTENER);
+            }
+
+        }
+
+    }
+
 }

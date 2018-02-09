@@ -1,4 +1,4 @@
-package com.dsapps.dota2guessthesound;
+package com.dsapps2018.dota2guessthesound;
 
 
 import android.content.SharedPreferences;
@@ -10,7 +10,6 @@ import android.support.v4.content.ContextCompat;
 
 import android.support.v7.app.AppCompatActivity;
 
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;

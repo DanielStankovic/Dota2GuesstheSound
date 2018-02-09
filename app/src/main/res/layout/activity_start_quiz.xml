@@ -7,7 +7,7 @@
     android:background="@drawable/background"
     android:gravity="bottom"
     android:orientation="vertical"
-    tools:context="com.dsapps.dota2guessthesound.StartQuizActivity">
+    tools:context="com.dsapps2018.dota2guessthesound.StartQuizActivity">
 
     <RelativeLayout
         android:id="@+id/playAgainLayout"
@@ -76,6 +76,14 @@
         android:layout_weight="5"
         android:paddingTop="20dp"
         android:visibility="visible">
+
+        <FrameLayout
+            android:id="@+id/gps_popup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
 
         <TextView
             android:id="@+id/scoreTextView"

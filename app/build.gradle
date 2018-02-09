@@ -5,7 +5,7 @@ android {
     }
     compileSdkVersion 25
     defaultConfig {
-        applicationId "com.dsapps.dota2guessthesound"
+        applicationId "com.dsapps2018.dota2guessthesound"
         minSdkVersion 17
         targetSdkVersion 25
         versionCode 1

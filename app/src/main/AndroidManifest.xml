@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dsapps.dota2guessthesound">
+    package="com.dsapps2018.dota2guessthesound">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
@@ -18,7 +18,7 @@
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
 
-        <activity android:name=".MainActivity">
+        <activity android:name="com.dsapps2018.dota2guessthesound.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,21 +26,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StartQuizActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.dsapps2018.dota2guessthesound.StartQuizActivity"
+            android:parentActivityName="com.dsapps2018.dota2guessthesound.MainActivity"
             android:theme="@style/playGameTheme" />
-        <activity android:name=".ToastActivity" />
-        <activity android:name=".OptionsActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name="com.dsapps2018.dota2guessthesound.ToastActivity" />
+        <activity android:name="com.dsapps2018.dota2guessthesound.OptionsActivity"
+            android:parentActivityName="com.dsapps2018.dota2guessthesound.MainActivity"/>
         <activity
-            android:name=".FastFingerActivity"
-            android:theme="@style/playGameTheme" />
-        <activity
-            android:name=".InvokerActivity"
+            android:name="com.dsapps2018.dota2guessthesound.FastFingerActivity"
             android:theme="@style/playGameTheme" />
         <activity
-            android:name=".AboutActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.dsapps2018.dota2guessthesound.InvokerActivity"
+            android:theme="@style/playGameTheme" />
+        <activity
+            android:name="com.dsapps2018.dota2guessthesound.AboutActivity"
+            android:parentActivityName="com.dsapps2018.dota2guessthesound.MainActivity" />
     </application>
 
 </manifest>
