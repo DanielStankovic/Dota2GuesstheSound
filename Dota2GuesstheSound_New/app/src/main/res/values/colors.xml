@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1c1c1c</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="actionBarTextColor">#807b7b</color>
+    <color name="textMenuInfo">#000000</color>
+
+    <color name="toastBackground">#333328</color>
+    <color name="toastText">#ff4d00</color>
+    <color name="lightGrayToast">#ce434242</color>
+
+    <color name="correctAnswer">#FF55FF00</color>
+    <color name="wrongAnswer">#fc0717</color>
+
+    <color name="infoToastTitleColor">#ffffff</color>
+
+    <color name="answersBackgroundColor">#00aaaaaa</color>
+
+    <color name="switchOnColor">#ff4d00</color>
+
+</resources>
