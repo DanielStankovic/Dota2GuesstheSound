@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backgroundView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/invoker_background"
+    android:orientation="vertical"
+    tools:context="com.dsapps2018.dota2guessthesound.InvokerActivity">
+
+    <RelativeLayout
+        android:id="@+id/gameOverContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/invokerHighScoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="61dp"
+            android:padding="10dp"
+            android:text="HighScore: 0"
+            android:textColor="#ff4d00"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/invokerResultTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#ff4d00"
+            android:textSize="40sp" />
+
+
+        <ImageView
+            android:id="@+id/goBackImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="67dp"
+            android:onClick="backToMenu"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            app:srcCompat="@drawable/back_to_menu" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/gameStartContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/welcomeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="Welcome to the Invoker Mode. The rules are simple.  Listen and Invoke the sounds that you hear in the correct order.  As the time goes on, you will have to Invoke faster. Survive as long as you can! Good luck!"
+            android:textAlignment="center"
+            android:textColor="@color/toastText"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/goInvokerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:onClick="goInvoker"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            app:srcCompat="@drawable/go_invoker_button" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/playGameContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/timerTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="34dp"
+                android:layout_marginStart="34dp"
+                android:text="0s"
+                android:textColor="@color/toastText"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:id="@+id/heart1Image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/timerTextView"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/heart2Image"
+                android:layout_toStartOf="@+id/heart2Image"
+                app:srcCompat="@drawable/heart" />
+
+            <ImageView
+                android:id="@+id/heart2Image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/heart3Image"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/heart3Image"
+                android:layout_toStartOf="@+id/heart3Image"
+                app:srcCompat="@drawable/heart" />
+
+            <ImageView
+                android:id="@+id/heart3Image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/heart1Image"
+                android:layout_marginEnd="37dp"
+                android:layout_marginRight="37dp"
+                app:srcCompat="@drawable/heart" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="bottom|center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/orb1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="100dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:adjustViewBounds="false" />
+
+            <ImageView
+                android:id="@+id/orb2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="100dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:adjustViewBounds="false" />
+
+            <ImageView
+                android:id="@+id/orb3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="100dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:adjustViewBounds="false" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="top|center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/buttonQ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:onClick="addQ"
+                app:srcCompat="@drawable/quas" />
+
+            <ImageView
+                android:id="@+id/buttonW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:onClick="addW"
+                app:srcCompat="@drawable/wex" />
+
+            <ImageView
+                android:id="@+id/buttonE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:onClick="addE"
+                app:srcCompat="@drawable/exort" />
+
+            <ImageView
+                android:id="@+id/buttonInvoke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:onClick="invokeSpell"
+                app:srcCompat="@drawable/invoke" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+

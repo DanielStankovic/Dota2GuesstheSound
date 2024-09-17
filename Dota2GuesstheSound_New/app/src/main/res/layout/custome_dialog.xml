@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@color/toastText"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="READY?"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            app:srcCompat="@drawable/actionbar_icon" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:background="@color/actionBarTextColor"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="Greetings fellow player! Having fast fingers is a crucial skill for any player. Choose the time and show us how swift you are:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp">
+
+            <RadioButton
+                android:id="@+id/thirtyTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="30s"
+                android:textSize="18sp"
+                app:buttonTint="@color/toastText" />
+
+            <RadioButton
+                android:id="@+id/sixtyTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="60s"
+                android:textSize="18sp"
+                app:buttonTint="@color/toastText" />
+
+            <RadioButton
+                android:id="@+id/ninetyTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="90s"
+                android:textSize="18sp"
+                app:buttonTint="@color/toastText" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/goButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/background_light"
+            android:padding="20dp"
+            android:text="GO!"
+            android:textColor="@color/toastText"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</LinearLayout>
