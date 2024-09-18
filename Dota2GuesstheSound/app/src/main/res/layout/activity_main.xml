@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.dsapps2018.dota2guessthesound.MainActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:id="@+id/gps_popup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+
+
+
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:onClick="showCoinToast"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            app:srcCompat="@drawable/coin_blank"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/coinTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/imageView6"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@id/imageView6"
+            android:layout_toStartOf="@id/imageView6"
+            android:text="0"
+            android:textColor="@color/toastText"
+            android:textSize="26sp"
+            tools:ignore="RtlHardcoded" />
+
+        <ImageView
+            android:id="@+id/leftArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            app:srcCompat="@drawable/left_arrow"
+            android:onClick="goLeft"
+            tools:ignore="RtlHardcoded" />
+
+        <ImageView
+            android:id="@+id/rightArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/right_arrow"
+            android:onClick="goRight"/>
+
+        <TextView
+            android:id="@+id/playGameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toEndOf="@id/leftArrow"
+            android:layout_toLeftOf="@+id/rightArrow"
+            android:layout_toRightOf="@id/leftArrow"
+            android:layout_toStartOf="@id/rightArrow"
+            android:gravity="center"
+            android:onClick="playGameActivity"
+            android:text="Start Quiz"
+            android:textColor="#ff4d00"
+            android:textSize="30sp"
+            android:visibility="visible"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/fastFingerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toEndOf="@id/leftArrow"
+            android:layout_toLeftOf="@+id/rightArrow"
+            android:layout_toRightOf="@id/leftArrow"
+            android:layout_toStartOf="@id/rightArrow"
+            android:gravity="center"
+            android:onClick="fastFingerActivity"
+            android:text="Fast Finger Mode"
+            android:textColor="#ff4d00"
+            android:textSize="30sp"
+            android:visibility="gone"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/invokerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toEndOf="@id/leftArrow"
+            android:layout_toLeftOf="@+id/rightArrow"
+            android:layout_toRightOf="@id/leftArrow"
+            android:layout_toStartOf="@id/rightArrow"
+            android:gravity="center"
+            android:onClick="invokerActivity"
+            android:text="Invoker Mode"
+            android:textColor="#ff4d00"
+            android:textSize="30sp"
+            android:visibility="gone"
+            tools:ignore="RtlHardcoded" />
+
+        <ImageView
+            android:id="@+id/achievementImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="30dp"
+            app:srcCompat="@drawable/achievement_icon"
+            android:onClick="showAchievementUi"/>
+
+        <ImageView
+            android:id="@+id/optionsImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            app:srcCompat="@drawable/options_icon"
+            android:onClick="optionsActivity"/>
+
+        <ImageView
+            android:id="@+id/aboutImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
+            app:srcCompat="@drawable/about_icon"
+            android:onClick="aboutActivity"/>
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="40dp"
+            android:maxWidth="40dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/games_controller" />
+
+        <TextView
+            android:id="@+id/signTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView7"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/imageView7"
+            android:text="Signed Out"
+            android:textColor="@color/toastText" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/signSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/coinTextView"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/textView10"
+            android:checked="false"
+            android:theme="@style/SwitchTheme"
+            android:onClick="onSwitchButtonClicked"/>
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/signSwitch"
+            android:layout_alignStart="@+id/imageView7"
+            android:text="Sign Out"
+            android:textColor="@color/toastText" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/signSwitch"
+            android:layout_alignBaseline="@+id/signSwitch"
+            android:text="Sign In"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/toastText" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:gravity="bottom|center_horizontal"
+        android:orientation="horizontal">
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="10dp"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_id" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

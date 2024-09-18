@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name">Spell Sound Quiz for Dota 2</string>
+
+    <string name="welcome_text">Welcome to Spell Sound Quiz for Dota 2. As Dota 2 fans, we all know that forward thinking,
+        strategic planning and quick reactions are the most important skills in the game. However, having a good ear for spell
+        sounds can sometimes save your or teammate\'s life. This quiz is designed to help you hone your listening abilities and in
+        that way improve your gameplay. Currently, we have 3 modes available: Quiz Mode, Fast Finger Mode, and Invoker Mode.
+    </string>
+
+    <string name="legal_disclaimer">THIS APP IS NOT CREATED, SPONSORED OR ENDORSED BY VALVE CORPORATION. This app does not
+        reflect the views or opinions of Valve Corporation or anyone officially involved in producing or managing Dota 2.
+        Dota 2 is a registered trademark of Valve Corporation. All of the in-game imagery, hero icons, hero names, sounds, spell names,
+        launcher icon, promo video cinematic and Dota name are copyright and/or registered trademarks of their respective owners. Usage for this app falls under
+        fair use guidelines.
+    </string>
+
+    <string name="credits">This app is developed by DS-Apps. Big thanks to <b>Željko Stanković</b> for helping with the content gathering.
+    Some game assets are <b>Designed by Freepik</b> designers, huge gratitude to them.</string>
+
+    <string name="changelog_version_title">Changelog \u0026 Version</string>
+    <string name="changelog_version">Version 1.0 \n </string>
+
+    <string name="signin_other_error">There was an issue with sign in.  Please check your internet connection or try again later.</string>
+
+    <string name="start_quiz_sign_in_failed">There was an issue with signing in process. Achievements can not be seen. Sign in with Google to see Achievements.</string>
+    <string name="status_exception_error">%1$s (status %2$d). %3$s.</string>
+    <string name="achievements_exception">There was an issue communicating with achievements. Try signing in with Google to see the Achievements.</string>
+
+    <string name="app_id" translatable="false">271440687081</string>
+
+
+
+    <!-- package_name -->
+    <string name="package_name" translatable="false">com.dsapps2018.dota2guessthesound</string>
+    <!-- achievement Novice Listener -->
+    <string name="achievement_novice_listener" translatable="false">CgkI6d-AmfMHEAIQAg</string>
+    <!-- achievement Apprentice Listener -->
+    <string name="achievement_apprentice_listener" translatable="false">CgkI6d-AmfMHEAIQAw</string>
+    <!-- achievement Journeyman Listener -->
+    <string name="achievement_journeyman_listener" translatable="false">CgkI6d-AmfMHEAIQBA</string>
+    <!-- achievement Master Listener -->
+    <string name="achievement_master_listener" translatable="false">CgkI6d-AmfMHEAIQBQ</string>
+    <!-- achievement Try-it-all -->
+    <string name="achievement_tryitall" translatable="false">CgkI6d-AmfMHEAIQBg</string>
+    <!-- achievement Hasty Trier -->
+    <string name="achievement_hasty_trier" translatable="false">CgkI6d-AmfMHEAIQBw</string>
+    <!-- achievement Patient Trier -->
+    <string name="achievement_patient_trier" translatable="false">CgkI6d-AmfMHEAIQCA</string>
+    <!-- achievement Unhurried Trier -->
+    <string name="achievement_unhurried_trier" translatable="false">CgkI6d-AmfMHEAIQCQ</string>
+    <!-- achievement Hasty Repeater -->
+    <string name="achievement_hasty_repeater" translatable="false">CgkI6d-AmfMHEAIQCg</string>
+    <!-- achievement Patient Repeater -->
+    <string name="achievement_patient_repeater" translatable="false">CgkI6d-AmfMHEAIQCw</string>
+    <!-- achievement Unhurried Repeater -->
+    <string name="achievement_unhurried_repeater" translatable="false">CgkI6d-AmfMHEAIQDA</string>
+    <!-- achievement Swift Fingers -->
+    <string name="achievement_swift_fingers" translatable="false">CgkI6d-AmfMHEAIQDQ</string>
+    <!-- achievement Hasty Touch -->
+    <string name="achievement_hasty_touch" translatable="false">CgkI6d-AmfMHEAIQDg</string>
+    <!-- achievement Rapid Mind -->
+    <string name="achievement_rapid_mind" translatable="false">CgkI6d-AmfMHEAIQDw</string>
+    <!-- achievement InvoNewbie -->
+    <string name="achievement_invonewbie" translatable="false">CgkI6d-AmfMHEAIQEA</string>
+    <!-- achievement InvoBeginner -->
+    <string name="achievement_invobeginner" translatable="false">CgkI6d-AmfMHEAIQEQ</string>
+    <!-- achievement InvoTrained -->
+    <string name="achievement_invotrained" translatable="false">CgkI6d-AmfMHEAIQEg</string>
+    <!-- achievement InvoExpert -->
+    <string name="achievement_invoexpert" translatable="false">CgkI6d-AmfMHEAIQEw</string>
+    <!-- achievement InvoGod -->
+    <string name="achievement_invogod" translatable="false">CgkI6d-AmfMHEAIQFA</string>
+    <!-- achievement Squishy -->
+    <string name="achievement_squishy" translatable="false">CgkI6d-AmfMHEAIQFQ</string>
+    <!-- achievement Tough -->
+    <string name="achievement_tough" translatable="false">CgkI6d-AmfMHEAIQFg</string>
+    <!-- achievement Resilient -->
+    <string name="achievement_resilient" translatable="false">CgkI6d-AmfMHEAIQFw</string>
+    <!-- achievement Tanky -->
+    <string name="achievement_tanky" translatable="false">CgkI6d-AmfMHEAIQGA</string>
+    <!-- achievement Diverse Skillset -->
+    <string name="achievement_diverse_skillset" translatable="false">CgkI6d-AmfMHEAIQGQ</string>
+    <!-- achievement Flawless Skillset -->
+    <string name="achievement_flawless_skillset" translatable="false">CgkI6d-AmfMHEAIQGg</string>
+    <!-- achievement Attracted -->
+    <string name="achievement_attracted" translatable="false">CgkI6d-AmfMHEAIQGw</string>
+    <!-- achievement Interested -->
+    <string name="achievement_interested" translatable="false">CgkI6d-AmfMHEAIQHA</string>
+    <!-- achievement Impressed -->
+    <string name="achievement_impressed" translatable="false">CgkI6d-AmfMHEAIQHQ</string>
+    <!-- achievement Hooked -->
+    <string name="achievement_hooked" translatable="false">CgkI6d-AmfMHEAIQHg</string>
+    <!-- achievement Absorbed -->
+    <string name="achievement_absorbed" translatable="false">CgkI6d-AmfMHEAIQHw</string>
+    <!-- achievement Immersed -->
+    <string name="achievement_immersed" translatable="false">CgkI6d-AmfMHEAIQIA</string>
+
+    
+    <string name="AdMob_App_Id">ca-app-pub-2701841893001237~2192936151</string>
+    <string name="banner_id">ca-app-pub-2701841893001237/7964137584</string>
+    <string name="interstitial_ad_id">ca-app-pub-2701841893001237/6035623027</string>
+    <string name="rewarded_video_ad_id">ca-app-pub-2701841893001237/7830731058</string>
+
+
+</resources>

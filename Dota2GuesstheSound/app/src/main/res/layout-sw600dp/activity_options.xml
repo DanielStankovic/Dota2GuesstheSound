@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dsapps2018.dota2guessthesound.OptionsActivity"
+    android:background="@drawable/background">
+
+    <TextView
+        android:id="@+id/volumeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:text="Volume"
+        android:textColor="@color/toastText"
+        android:textSize="26sp" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="80dp"
+        android:max="100"
+        android:progress="0"
+        android:thumb="@drawable/seekbar_icon"
+        android:progressDrawable="@drawable/seekbar_progressbar"
+        android:thumbTintMode="multiply" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal">
+
+
+        <TextView
+            android:id="@+id/watch_video_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Watch Video"
+            android:gravity="center_horizontal"
+            android:textSize="24sp"
+            android:textColor="@color/toastText"/>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="showAdVideo"
+            app:srcCompat="@drawable/get_coin_stone" />
+
+        <TextView
+            android:id="@+id/rate_app_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center_horizontal"
+            android:text="Rate App"
+            android:textColor="@color/toastText"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="rateApp"
+            app:srcCompat="@drawable/rate_stone" />
+
+        <TextView
+            android:id="@+id/email_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center_horizontal"
+            android:text="Email Us"
+            android:textColor="@color/toastText"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="sendEmail"
+            app:srcCompat="@drawable/email_stone" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+    }
+    compileSdk 35
+    defaultConfig {
+        applicationId "com.dsapps2018.dota2guessthesound"
+        minSdk 24
+        targetSdk 35
+        versionCode 7
+        versionName "1.1.5"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+    }
+    buildFeatures {
+        buildConfig true
+    }
+    productFlavors {
+    }
+    namespace 'com.dsapps2018.dota2guessthesound'
+}
+
+dependencies {
+    implementation 'com.google.firebase:firebase-core:21.1.1'
+    implementation "androidx.core:core-ktx:1.13.1"
+    implementation "androidx.appcompat:appcompat:1.7.0"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation('com.github.bumptech.glide:glide:4.5.0')
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
+    implementation 'com.google.firebase:firebase-ads:23.3.0'
+    implementation 'com.google.android.gms:play-services-ads:23.3.0'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.google.android.gms:play-services-games:23.2.0'
+    implementation 'com.google.android.gms:play-services-auth:21.2.0'
+}
+
+
+
+apply plugin: 'com.google.gms.google-services'
